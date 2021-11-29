@@ -4,4 +4,6 @@ const router = Router()
 
 // routes
 router.post('/', postProduct)
+
+
 export default router
