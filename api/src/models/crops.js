@@ -2,7 +2,7 @@ import  Sequelize  from 'sequelize';
 
 import  {sequelize}  from '../database/db';
 
-const Cops = sequelize.define('cops', {
+const Crops = sequelize.define('crops', {
     id: {
         type: Sequelize.INTEGER,
         // allowNull: true,
@@ -23,6 +23,8 @@ const Cops = sequelize.define('cops', {
   
       },
 
+},{
+  timestamps: false,
 })
 
-export default Cops; 
+export default Crops; 

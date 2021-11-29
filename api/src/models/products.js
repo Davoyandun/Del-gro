@@ -40,10 +40,7 @@ const Products = sequelize.define(
       type: Sequelize.TEXT,
       allowNull: true,
     },
-    formula: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
+   
     stock: {
       type: Sequelize.BOOLEAN,
       allowNull: false,

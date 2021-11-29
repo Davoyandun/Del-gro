@@ -23,6 +23,8 @@ const Pests = sequelize.define('pests', {
   
       },
 
+},{
+  timestamps: false,
 })
 
 export default Pests;

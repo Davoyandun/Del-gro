@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import {postBrand} from '../controllers/brands';
+import { postPests } from '../controllers/pests';
 const router = Router()
 
 
 // Routes
-router.post('/',postBrand)
+router.post('/',postPests)
  
 
 

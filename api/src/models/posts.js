@@ -13,16 +13,19 @@ const Posts = sequelize.define('posts', {
         type: Sequelize.STRING,
         allowNull: false,
       },
+
       image: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
   
       },
 
+},{
+  timestamps: false,
 })
 
 export default Posts;

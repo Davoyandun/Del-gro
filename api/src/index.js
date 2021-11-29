@@ -4,7 +4,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 async function main() {
-  sequelize.sync({ force: false }).then(() => {
+  sequelize.sync({ force: true }).then(() => {
     app.listen(3001, () => {
       console.log("listening on port 3001"); // eslint-disable-line no-console
     });
