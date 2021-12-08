@@ -1,12 +1,13 @@
 import {Router} from 'express';
-import {postProduct} from '../controllers/products'
+import {postProduct, getProducts} from '../controllers/products'
 const router = Router()
 
 
 // routes
-router.post('/', postProduct)
+router.post('/', postProduct);
+router.get('/', getProducts)
 
 
 
 
-export default router
+export default router 

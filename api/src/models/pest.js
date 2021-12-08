@@ -2,7 +2,7 @@ import  Sequelize  from 'sequelize';
 
 import  {sequelize}  from '../database/db';
 
-const Pests = sequelize.define('pests', {
+const Pest = sequelize.define('pest', {
     id: {
         type: Sequelize.INTEGER,
         // allowNull: true,
@@ -27,4 +27,4 @@ const Pests = sequelize.define('pests', {
   timestamps: false,
 })
 
-export default Pests;
+export default Pest;

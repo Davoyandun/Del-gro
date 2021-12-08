@@ -2,7 +2,7 @@ import  Sequelize  from 'sequelize';
 
 import  {sequelize}  from '../database/db';
 
-const Brands = sequelize.define('brands', {
+const Crop = sequelize.define('crop', {
     id: {
         type: Sequelize.INTEGER,
         // allowNull: true,
@@ -27,4 +27,4 @@ const Brands = sequelize.define('brands', {
   timestamps: false,
 })
 
-export default Brands; 
+export default Crop; 

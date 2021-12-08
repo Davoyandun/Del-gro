@@ -2,7 +2,7 @@ import  Sequelize  from 'sequelize';
 
 import  {sequelize}  from '../database/db';
 
-const Posts = sequelize.define('posts', {
+const Brand = sequelize.define('brand', {
     id: {
         type: Sequelize.INTEGER,
         // allowNull: true,
@@ -13,13 +13,12 @@ const Posts = sequelize.define('posts', {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       image: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: false,
   
       },
@@ -28,4 +27,4 @@ const Posts = sequelize.define('posts', {
   timestamps: false,
 })
 
-export default Posts;
+export default Brand; 

@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
-import Crops from "../models/crops";
+import Crops from "../models/crop";
 
 
 export async function postCrop(req, res) {

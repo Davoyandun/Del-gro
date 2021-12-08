@@ -1,10 +1,13 @@
 import Sequelize from "sequelize";
-import Brands from "./brands";
+import Brand from "./brand";
+import Crop from "./crop";
+import Pest from "./pest";
 
 import { sequelize } from "../database/db";
 
-const Products = sequelize.define(
-  "products",
+
+const Product = sequelize.define(
+  "product",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -50,7 +53,17 @@ const Products = sequelize.define(
     timestamps: false,
   }
 );
-Products.belongsTo(Brands, { foreignKey: "id_products", sourceKey: "id" });
-Brands.hasMany(Products, { foreignKey: "id_products", sourceKey: "id" });
 
-export default Products;
+// el producto pertenece a diferentes marcas
+Product.belongsToMany(Brand, { through:'product_brand' });
+Brand.belongsToMany(Product, { through:'product_brand' });
+
+// el producto pertenece a diferentes cultivos 
+Product.belongsToMany(Crop, { through:'product_crop' });
+Crop.belongsToMany(Product, { through:'product_crop' });
+
+// El producto pretenece a diferentes plagas
+Product.belongsToMany(Pest, { through:'product_pest' });
+Pest.belongsToMany(Product, { through:'product_pest' });
+
+export default Product;

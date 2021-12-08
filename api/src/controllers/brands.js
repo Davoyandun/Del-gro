@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
-import Brands from "../models/brands";
+import Brands from "../models/brand";
 
 
 export async function postBrand(req, res) {
