@@ -6,6 +6,7 @@ export default function FormProducts() {
     <Form>
       <h3> Crear Nuevo Producto</h3>
       <Row className="mb-3">
+        
         <Form.Group as={Col}>
           <Form.Label>Nombre</Form.Label>
           <Form.Control type="text" placeholder="Ej: Metralla" />
@@ -36,7 +37,7 @@ export default function FormProducts() {
       </Form.Group>
 
       <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Default file input example</Form.Label>
+        <Form.Label>Imagen del Producto</Form.Label>
         <Form.Control type="file" />
       </Form.Group>
       <Row className="mb-3">
