@@ -3,7 +3,7 @@ import axios from "axios";
 import AgroContext from "./AgroContext"
 import AgroReducer from "./AgroReducer"
 import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS} from "./styles.js"
- const BaseURL = "http://localhost:3001/"
+import { BaseURL } from "../utils/utils";
 
 const AgroState = (props) => {
   const initialState = {

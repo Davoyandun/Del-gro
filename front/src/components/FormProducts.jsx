@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import AgroContext from "../context/AgroContext";
+import { clearState, verificationForm } from "../utils/utils";
+import { BaseURL } from "../utils/utils";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function FormProducts() {
   const Context = useContext(AgroContext);
@@ -27,11 +31,32 @@ export default function FormProducts() {
 
   // handles
 
-  function handlerOnChange(e) {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
+  async function handlerOnChange(e) {
+    if (e.target.name === "image") {
+      let file = e.target.files;
+
+      let formData = new FormData();
+      formData.append("file", file[0]);
+      formData.append("upload_preset", "DelAgro");
+      let res = await fetch(
+        "https://api.cloudinary.com/v1_1/salvatorehnery/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const img = await res.json();
+
+      setState({
+        ...state,
+        image: img.secure_url,
+      });
+    } else {
+      setState({
+        ...state,
+        [e.target.name]: e.target.value,
+      });
+    }
   }
 
   function handlerBrand(e) {
@@ -86,9 +111,30 @@ export default function FormProducts() {
     }
   }
 
+  async function handlerSubmit(e) {
+    e.preventDefault();
+    let errors = verificationForm(state);
+    if (Object.entries(errors).length === 0) {
+      await axios.post(`${BaseURL}products`, state);
+      Swal.fire({
+        icon: "success",
+        title: `Producto agregado correctamente`,
+        text: `El producto ${state.name} se agrego a la base de datos`,
+      });
+
+      clearState(setState);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Espacios vacios en el formulario",
+        text: `Compruebe la informacion e intentelo de nuevo`,
+      });
+    }
+  }
+
   console.log(state);
   return (
-    <Form>
+    <Form onSubmit={(e) => handlerSubmit(e)}>
       <h3> Crear Nuevo Producto</h3>
       <Row className="mb-3">
         <Form.Group as={Col}>
@@ -158,7 +204,12 @@ export default function FormProducts() {
 
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Imagen del Producto</Form.Label>
-        <Form.Control type="file" name="image" value={state.image} />
+        <Form.Control
+          type="file"
+          accept="image/png, .jpeg, .jpg"
+          name="image"
+          onChange={(e) => handlerOnChange(e)}
+        />
       </Form.Group>
       <Row className="mb-3">
         <Form.Group as={Col} className="mb-3">
