@@ -3,8 +3,7 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import AgroContext from "../context/AgroContext";
 
 export default function FormProducts() {
-
-  const Context = useContext(AgroContext)
+  const Context = useContext(AgroContext);
 
   const [state, setState] = useState({
     name: "",
@@ -23,19 +22,71 @@ export default function FormProducts() {
   useEffect(() => {
     Context.getCrops();
     Context.getBrands();
-    Context.getPests()
-
+    Context.getPests();
   }, []);
 
-  console.log(Context.crops)
+  // handles
 
-  function onChange(e) {
+  function handlerOnChange(e) {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   }
 
+  function handlerBrand(e) {
+    if (e.target.checked) {
+      if (!state.ids_brand.includes(parseInt(e.target.value))) {
+        setState({
+          ...state,
+          ids_brand: [...state.ids_brand, parseInt(e.target.value)],
+        });
+      }
+    } else {
+      setState({
+        ...state,
+        ids_brand: [
+          ...state.ids_brand.filter((id) => id !== parseInt(e.target.value)),
+        ],
+      });
+    }
+  }
+  function handlerCrop(e) {
+    if (e.target.checked) {
+      if (!state.ids_crop.includes(parseInt(e.target.value))) {
+        setState({
+          ...state,
+          ids_crop: [...state.ids_crop, parseInt(e.target.value)],
+        });
+      }
+    } else {
+      setState({
+        ...state,
+        ids_crop: [
+          ...state.ids_crop.filter((id) => id !== parseInt(e.target.value)),
+        ],
+      });
+    }
+  }
+  function handlerPest(e) {
+    if (e.target.checked) {
+      if (!state.ids_pest.includes(parseInt(e.target.value))) {
+        setState({
+          ...state,
+          ids_pest: [...state.ids_pest, parseInt(e.target.value)],
+        });
+      }
+    } else {
+      setState({
+        ...state,
+        ids_pest: [
+          ...state.ids_pest.filter((id) => id !== parseInt(e.target.value)),
+        ],
+      });
+    }
+  }
+
+  console.log(state);
   return (
     <Form>
       <h3> Crear Nuevo Producto</h3>
@@ -47,6 +98,7 @@ export default function FormProducts() {
             placeholder="Ej: Metralla"
             name="name"
             value={state.name}
+            onChange={(e) => handlerOnChange(e)}
           />
         </Form.Group>
         <Form.Group as={Col}>
@@ -56,6 +108,7 @@ export default function FormProducts() {
             placeholder="Ej: 100, 300 y 500 g"
             name="presentation"
             value={state.presentation}
+            onChange={(e) => handlerOnChange(e)}
           />
         </Form.Group>
         <Form.Group as={Col}>
@@ -65,6 +118,7 @@ export default function FormProducts() {
             placeholder="15.50"
             name="price"
             value={state.price}
+            onChange={(e) => handlerOnChange(e)}
           />
         </Form.Group>
       </Row>
@@ -77,6 +131,7 @@ export default function FormProducts() {
             placeholder="clorantraniliprol"
             name="composition"
             value={state.composition}
+            onChange={(e) => handlerOnChange(e)}
           />
         </Form.Group>
       </Row>
@@ -87,22 +142,23 @@ export default function FormProducts() {
           rows={3}
           name="description"
           value={state.description}
+          onChange={(e) => handlerOnChange(e)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Ensayos Realizados</Form.Label>
-        <Form.Control 
-        as="textarea" 
-        rows={3} 
-        name="test"
-        value={state.test} />
+        <Form.Control
+          as="textarea"
+          rows={3}
+          name="test"
+          value={state.test}
+          onChange={(e) => handlerOnChange(e)}
+        />
       </Form.Group>
 
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Imagen del Producto</Form.Label>
-        <Form.Control type="file" 
-        name="image"
-        value={state.image} />
+        <Form.Control type="file" name="image" value={state.image} />
       </Form.Group>
       <Row className="mb-3">
         <Form.Group as={Col} className="mb-3">
@@ -110,24 +166,20 @@ export default function FormProducts() {
             Cultivos
           </Form.Label>
           <Col sm={10}>
-            <Form.Check
-              type="checkbox"
-              label="first radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios1"
-            />
-            <Form.Check
-              type="checkbox"
-              label="second radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              type="checkbox"
-              label="third radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios3"
-            />
+            {Context.crops ? (
+              Context.crops.map((crop) => (
+                <Form.Check
+                  type="checkbox"
+                  label={crop.name}
+                  name={crop.name}
+                  key={crop.id}
+                  value={crop.id}
+                  onChange={(e) => handlerCrop(e)}
+                />
+              ))
+            ) : (
+              <div>No existen cultivos registrados</div>
+            )}
           </Col>
         </Form.Group>
 
@@ -136,24 +188,20 @@ export default function FormProducts() {
             Marca
           </Form.Label>
           <Col sm={10}>
-            <Form.Check
-              type="checkbox"
-              label="first radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios1"
-            />
-            <Form.Check
-              type="checkbox"
-              label="second radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              type="checkbox"
-              label="third radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios3"
-            />
+            {Context.brands ? (
+              Context.brands.map((brand) => (
+                <Form.Check
+                  type="checkbox"
+                  label={brand.name}
+                  name={brand.name}
+                  key={brand.id}
+                  value={brand.id}
+                  onChange={(e) => handlerBrand(e)}
+                />
+              ))
+            ) : (
+              <div>No existen marcas registradas</div>
+            )}
           </Col>
         </Form.Group>
         <Form.Group as={Col} className="mb-3">
@@ -161,24 +209,20 @@ export default function FormProducts() {
             Plagas
           </Form.Label>
           <Col sm={10}>
-            <Form.Check
-              type="checkbox"
-              label="first radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios1"
-            />
-            <Form.Check
-              type="checkbox"
-              label="second radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              type="checkbox"
-              label="third radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios3"
-            />
+            {Context.pests ? (
+              Context.pests.map((pest) => (
+                <Form.Check
+                  type="checkbox"
+                  label={pest.name}
+                  name={pest.name}
+                  key={pest.id}
+                  value={pest.id}
+                  onChange={(e) => handlerPest(e)}
+                />
+              ))
+            ) : (
+              <div>No existen Plagas registradas</div>
+            )}
           </Col>
         </Form.Group>
       </Row>
