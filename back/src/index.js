@@ -6,7 +6,7 @@ import "regenerator-runtime/runtime";
 
 
 async function main() {
-  sequelize.sync({ force: true }).then(() => {
+  sequelize.sync({ force: false }).then(() => {
     app.listen(3001, () => {
       console.log("Listen on Port: 3001"); // eslint-disable-line no-console
     });

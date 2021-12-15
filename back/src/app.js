@@ -1,5 +1,6 @@
 import express,{json} from 'express';
 import morgan from 'morgan';
+const cors = require('cors');
 
 
 
@@ -20,6 +21,7 @@ const app = express();
 //middlewares
 app.use(morgan('dev'));
 app.use(json())
+app.use(cors())
 
 
 //routes

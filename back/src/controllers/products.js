@@ -38,11 +38,11 @@ export async function postProduct(req, res) {
     }
     if (ids_pest) {
       let pestProduct = await Pest.findAll({ where: { id: ids_pest } });
-      await newProduct.addBrand(pestProduct);
+      await newProduct.addPest(pestProduct);
     }
     if (ids_crop) {
-      let cropProduct = await Brand.findAll({ where: { id: ids_crop } });
-      await newProduct.addBrand(cropProduct);
+      let cropProduct = await Crop.findAll({ where: { id: ids_crop } });
+      await newProduct.addCrop(cropProduct);
     }
 
     return res.json({ message: "ok", data: newProduct });

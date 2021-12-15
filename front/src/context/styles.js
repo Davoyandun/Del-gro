@@ -1,0 +1,6 @@
+export const GET_PRODUCTS = "GET_PRODUCTS"
+export const GET_DETAILS = "GET_DETAILS"
+export const GET_BRANDS = "GET_BRANDS"
+export const GET_CROPS = "GET_CROPS"
+export const GET_PESTS = "GET_PESTS"
+export const GET_POSTS = "GET_POSTS"

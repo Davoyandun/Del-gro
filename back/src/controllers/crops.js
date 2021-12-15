@@ -1,6 +1,7 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
 import Crops from "../models/crop";
+import Products from "../models/product";
 
 
 export async function postCrop(req, res) {
@@ -23,5 +24,25 @@ export async function postCrop(req, res) {
   } catch (err) {
     console.log(err);
     res.json({ err });
+  }
+}
+
+export async function getCrops(req, res) {
+  try {
+    Crops.findAll({
+      include: [
+        {
+          model: Products,
+          attributes: ["id", "name"],
+        },
+      ],
+    }).then((response) =>
+      res.status(200).json({
+        message: "Todos los cultivos en base de Datos",
+        data: response,
+      })
+    );
+  } catch (error) {
+    console.log(error);
   }
 }
