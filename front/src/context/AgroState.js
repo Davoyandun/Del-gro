@@ -2,8 +2,8 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import AgroContext from "./AgroContext"
 import AgroReducer from "./AgroReducer"
-import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS} from "./styles.js"
-import { BaseURL } from "../utils/utils";
+import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS} from "./Styles.js"
+import { BaseURL } from "../utils/Utils";
 
 const AgroState = (props) => {
   const initialState = {

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import AgroContext from "../context/AgroContext";
-import { clearState, verificationForm } from "../utils/utils";
-import { BaseURL } from "../utils/utils";
+import { clearState, verificationForm } from "../utils/Utils";
+import { BaseURL } from "../utils/Utils";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -277,7 +277,6 @@ export default function FormProducts() {
           </Col>
         </Form.Group>
       </Row>
-
       <Button variant="primary" type="submit">
         Submit
       </Button>
