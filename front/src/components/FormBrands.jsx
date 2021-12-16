@@ -70,7 +70,7 @@ export default function FormBrands() {
             <output> X</output>
           ) : (
             <output>
-              <img src={state.image} width="45" height="45"></img>
+              <img src={state.image} width="45" height="45" alt="Img No Found"></img>
             </output>
           )}
           <Form.Control
