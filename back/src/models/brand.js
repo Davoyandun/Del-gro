@@ -18,7 +18,7 @@ const Brand = sequelize.define('brand', {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
   
       },

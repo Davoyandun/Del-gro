@@ -18,7 +18,7 @@ const Pest = sequelize.define('pest', {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
   
       },

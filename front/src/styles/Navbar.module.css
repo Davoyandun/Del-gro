@@ -71,10 +71,10 @@
    
 }
 
-/* .text:hover{
-    color: red;
-}
- */
+.text:hover{
+    color: red;}
+
+
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -105,7 +105,7 @@
     padding: 20px 0;
     height: calc(100% - 60px);
     overflow-y: auto;
-    /* left: 100%;  */
+ left: 100%; 
     transition: left 0.3s;
   }
 
@@ -127,5 +127,9 @@
 
   .toggle {
   display: block;
+  }
+  .visible {
+    left: 0%; 
+
   }
 }

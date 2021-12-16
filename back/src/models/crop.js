@@ -18,7 +18,7 @@ const Crop = sequelize.define('crop', {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
   
       },
