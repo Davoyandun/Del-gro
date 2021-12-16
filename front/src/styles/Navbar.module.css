@@ -2,7 +2,6 @@
   margin: 0%;
   box-sizing: border-box;
   font-family: sans-serif;
- 
 }
 .header {
   background-color: rgb(255, 255, 255);
@@ -12,57 +11,121 @@
   left: 0%;
   width: 100%;
 }
-.nav{
+.nav {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  max-width: 992px;
+  margin: 0 auto;
+}
+.linck {
+  color: black;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+.logo {
+  font-size: 30px;
+  padding: 0 40px;
+  font-weight: bold;
+  line-height: 90px;
+}
+.list {
+  display: flex;
+  margin-right: 40px;
+  list-style: none;
+}
+.item {
     display: flex;
-    justify-content: space-between;
-    text-decoration: none;
-    max-width: 992px;
-    margin: 0 auto;
+  font-size: 18px;
+  margin: 0 10px;
+  line-height: 20px;
+  text-transform: uppercase;
+  width: max-content;
+  justify-content: center;
 }
-.linck{
-    color: black;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 3px;
-}
-.logo{
-    font-size: 30px;
-    padding: 0 40px;
-    font-weight: bold;
-    line-height: 90px;
-    
+.text {
+  color: rgb(0, 0, 0);
+  justify-content: center;
 
 }
-.list{
-    display: flex;
-    margin-right: 40px;
-    list-style: none;
+.text:hover {
+  color: rgb(255, 0, 0);
 }
-.item{
+
+/* toggle  */
+
+.toggle {
+  color: red;
+  background: none;
+  border: none;
+  font-size: 30px;
+  padding: 0 20px;
+  line-height: 60px;
+  cursor: pointer;
+  display: none;
+}
+.icon{
+    color: red;
+    justify-content: center;
+   
+}
+
+/* .text:hover{
+    color: red;
+}
+ */
+
+/* MOBILE */
+@media (max-width: 768px) {
+  * {
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  .header {
+
+    height: 70px;
+   
+  }
+
+  .logo {
+    font-size: 25px;
+    padding: 0 20px;
+    line-height: 70px;
+  }
+  .list {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    background-color: #2c3e50;
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    padding: 20px 0;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    /* left: 100%;  */
+    transition: left 0.3s;
+  }
+
+  .item {
     font-size: 18px;
     margin: 0 10px;
     line-height: 20px;
     text-transform: uppercase;
     width: max-content;
-
-}
-.text{
-    color:rgb(0, 0, 0)
-}
-.text:hover{
+  }
+  .text {
+    color: rgb(0, 0, 0);
+  }
+  .linck:hover {
     color: rgb(255, 0, 0);
+  }
 
+  /* toggle  */
+
+  .toggle {
+  display: block;
+  }
 }
-
-
-
-
-
-
-
-/* .text:hover{
-    color: red;
-}
-.icon:hover{
-    color: red;
-} */
