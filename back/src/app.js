@@ -7,6 +7,7 @@ const cors = require('cors');
 
 // Import routes 
 
+import carruselRoutes from './routes/carrusels'
 import productRoutes from './routes/products';
 import brandRoutes from './routes/brands'
 import pestRoutes from './routes/pests'
@@ -30,6 +31,7 @@ app.use('/brands',brandRoutes);
 app.use('/pests',pestRoutes);
 app.use('/crops',cropRoutes);
 app.use('/posts',postRoutes);
+app.use('/carrusel',carruselRoutes);
 
 
 
