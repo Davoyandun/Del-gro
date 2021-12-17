@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import { postCarrusel, getCarrusel } from '../controllers/carrusel';
+import { postImg, getCarrusel } from '../controllers/carrusel';
 const router = Router()
 
 
 // Routes
-router.post('/',postCarrusel);
+router.post('/',postImg);
 router.get('/',getCarrusel)
 
  

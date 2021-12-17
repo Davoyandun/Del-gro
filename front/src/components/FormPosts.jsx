@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function FormCarrusel() {
+export default function FormPosts() {
 
     const [state, setState] = useState({
         name: "",
@@ -22,11 +22,11 @@ export default function FormCarrusel() {
         e.preventDefault();
         let errors = verificationFormOthers(state);
         if (Object.entries(errors).length === 0) {
-          await axios.post(`${BaseURL}carrusel`, state);
+          await axios.post(`${BaseURL}posts`, state);
           Swal.fire({
             icon: "success",
-            title: `Imagen de carrusel agregada correctamente`,
-            text: `La imagen ${state.name} se agrego a la base de datos`,
+            title: `Posteo realizado`,
+            text: `El post ${state.name} se agrego a la base de datos`,
           });
     
           clearState(setState);
@@ -40,12 +40,13 @@ export default function FormCarrusel() {
         }
       }
 
-      return (
+      console.log(state)
+    return (
         <Form onSubmit={(e) => handlerSubmit(e)}>
         <Container>
-          <h3> Inserte imagen de carrusel </h3>
+          <h3> Agrega un nuevo Post </h3>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Titulo</Form.Label>
+            <Form.Label>Titulo de noticia</Form.Label>
             <Form.Control
               type="text"
               placeholder="Nueva Promoción"
@@ -56,7 +57,7 @@ export default function FormCarrusel() {
           </Form.Group>
   
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Descripción </Form.Label>
+            <Form.Label>Noticia </Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -66,10 +67,10 @@ export default function FormCarrusel() {
               onChange={(e) => handlerOnChange(e, state, setState)}
             />
           </Form.Group>
-          <h5 >Recuerde que las imagenes deben guardarse en un formato 1200X400  </h5>
+  
 
           <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Imagen de carrusel</Form.Label>
+            <Form.Label>Foto de noticia</Form.Label>
             {!state.image ? (
               <output> X</output>
             ) : (

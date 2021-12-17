@@ -1,10 +1,11 @@
 import {Router} from 'express';
-import { postPosts } from '../controllers/posts';
+import { postPosts, getPosts } from '../controllers/posts';
 const router = Router()
 
 
 // Routes
 router.post('/',postPosts)
+router.get('/',getPosts)
  
 
 

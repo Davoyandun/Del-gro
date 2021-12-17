@@ -3,7 +3,7 @@ import Sequelize from "sequelize";
 import Carrusel from "../models/carrusel";
 
 
-export async function postCarrusel(req, res) {
+export async function postImg(req, res) {
     try {
   const {
     name,
@@ -30,7 +30,7 @@ export async function getCarrusel(req, res) {
     try {
       Carrusel.findAll().then((response) =>
         res.status(200).json({
-          message: "Todos los cultivos en base de Datos",
+          message: "Todos los carruseles en base de Datos",
           data: response,
         })
       );

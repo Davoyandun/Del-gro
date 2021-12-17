@@ -25,3 +25,18 @@ export async function postPosts(req, res) {
     res.json({ err });
   }
 }
+
+
+export async function getPosts(req, res) {
+  try {
+    Posts.findAll().then((response) =>
+      res.status(200).json({
+        message: "Todos los Posts en base de Datos",
+        data: response,
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+

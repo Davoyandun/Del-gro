@@ -20,7 +20,7 @@ const Carrusel = sequelize.define('carrusel', {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
   
       },
 
