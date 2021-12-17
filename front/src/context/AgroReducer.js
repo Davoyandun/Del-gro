@@ -5,6 +5,7 @@ import {
   GET_PRODUCTS,
   GET_POSTS,
   GET_DETAILS,
+  GET_CARRUSEL,
 } from "./Styles.js";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -42,6 +43,11 @@ export default (state, action) => {
         ...state,
         posts: payload,
       };
+      case GET_CARRUSEL:
+        return {
+          ...state,
+          carrusel: payload,
+        };
     default:
       return state;
   }

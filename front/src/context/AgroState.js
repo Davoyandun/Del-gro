@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import AgroContext from "./AgroContext"
 import AgroReducer from "./AgroReducer"
-import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS} from "./Styles.js"
+import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS, GET_CARRUSEL} from "./Styles.js"
 import { BaseURL } from "../utils/Utils";
 
 const AgroState = (props) => {
@@ -13,6 +13,7 @@ const AgroState = (props) => {
     crops:[],
     pests:[],
     posts:[],
+    carrusel:[]
   };
 
   const [state, dispatch] = useReducer(AgroReducer, initialState);
@@ -62,6 +63,15 @@ const AgroState = (props) => {
       console.error(error);
     }
   };
+  const getCarrusel = async () => {
+    try {
+      const resCarrusel = await axios.get(`${BaseURL}carrusel`);
+      const data = resCarrusel.data.data;
+      dispatch({ type: GET_CARRUSEL, payload: data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getDetail = async (id) => {
     try {
@@ -82,12 +92,14 @@ const AgroState = (props) => {
         brands: state.brands,
         pests: state.pests,
         posts: state.posts,
+        carrusel : state.carrusel,
         getProducts,
         getDetail,
         getCrops,
         getPests,
         getBrands,
         getPosts,
+        getCarrusel,
       }}
     >
       {props.children}

@@ -60,7 +60,7 @@ export default function FormPosts() {
             <Form.Label>Noticia </Form.Label>
             <Form.Control
               as="textarea"
-              rows={3}
+              rows={5}
               type="text"
               name="description"
               value={state.description}
