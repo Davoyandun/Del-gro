@@ -20,8 +20,8 @@ const AgroState = (props) => {
 
   const getProducts = async () => {
     try {
-      const resProducs = await axios.get(`${BaseURL}products`);
-      const data = resProducs.data.data;
+      const resProducts = await axios.get(`${BaseURL}products`);
+      const data = resProducts.data;
       dispatch({ type: GET_PRODUCTS, payload: data });
     } catch (error) {
       console.error(error);

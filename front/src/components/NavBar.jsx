@@ -6,16 +6,16 @@ import iconContact from "../styles/images/iconContact.svg";
 import Logo from "../styles/images/Logo.png";
 import style from "../styles/Navbar.module.css";
 
-import { Navbar, Nav, Container, NavLink } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 
 export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="ligth" variant="dark">
       <Container  >
-        <Navbar.Brand href="#">
-          <NavLink to="/">
+        <Navbar.Brand href="/">
+         
             <img className="Logo" src={Logo} alt="Imagen No Encontrada" />
-          </NavLink>
+     
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"  ></Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav">

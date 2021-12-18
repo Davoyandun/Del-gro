@@ -139,7 +139,7 @@ export default function FormProducts() {
           <Form.Group as={Col}>
             <Form.Label>Precio</Form.Label>
             <Form.Control
-              type="num"
+              type="number"
               placeholder="15.50"
               name="price"
               value={state.price}
