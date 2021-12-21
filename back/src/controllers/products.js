@@ -71,7 +71,7 @@ export async function getProducts(req, res) {
   }).then((response) => res.status(200).json(response));
 }
 
-export async function putProducts(req, res) {
+export async function putProduct(req, res) {
   const {
     name,
     description,
@@ -133,5 +133,24 @@ export async function putProducts(req, res) {
     });
   } catch (error) {
     return console.log(error);
+  }
+}
+
+export async function deleteProduct(req, res) {
+  const { id } = req.params
+  try {
+       await Product.destroy({ where: { id: id } })
+      return res.status(200).json({
+          message: 'Product deleted successfully',
+      
+      })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({
+          message: 'Something goes Wrong',
+          data: {}
+
+      })
+
   }
 }

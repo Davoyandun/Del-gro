@@ -43,7 +43,7 @@ export async function getBrands(req, res) {
 }
 
 
-export async function putBrands(req, res) {
+export async function putBrand(req, res) {
   const { name, description, image } = req.body;
   const { id } = req.params;
   try {
@@ -59,5 +59,25 @@ export async function putBrands(req, res) {
     return res.status(200).json({ message: "Brand  updated successfully" });
   } catch (err) {
     console.log(err);
+  }
+}
+
+
+export async function deleteBrand(req, res) {
+  const { id } = req.params
+  try {
+       await Brand.destroy({ where: { id: id } })
+      return res.status(200).json({
+          message: 'Brand deleted successfully',
+      
+      })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({
+          message: 'Something goes Wrong',
+          data: {}
+
+      })
+
   }
 }

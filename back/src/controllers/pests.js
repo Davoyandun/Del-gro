@@ -37,7 +37,7 @@ export async function getPests(req, res) {
   }
 }
 
-export async function putPests(req, res) {
+export async function putPest(req, res) {
   const { name, description, image } = req.body;
   const { id } = req.params;
   try {
@@ -53,5 +53,25 @@ export async function putPests(req, res) {
     return res.status(200).json({ message: "Pest  updated successfully" });
   } catch (err) {
     console.log(err);
+  }
+}
+
+
+export async function deletePest(req, res) {
+  const { id } = req.params
+  try {
+       await Pest.destroy({ where: { id: id } })
+      return res.status(200).json({
+          message: 'Pest deleted successfully',
+      
+      })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({
+          message: 'Something goes Wrong',
+          data: {}
+
+      })
+
   }
 }

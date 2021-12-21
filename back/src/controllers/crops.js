@@ -46,7 +46,7 @@ export async function getCrops(req, res) {
     console.log(error);
   }
 }
-export async function putCrops(req, res) {
+export async function putCrop(req, res) {
   const { name, description, image } = req.body;
   const { id } = req.params;
   try {
@@ -62,5 +62,26 @@ export async function putCrops(req, res) {
     return res.status(200).json({ message: "Crop  updated successfully" });
   } catch (err) {
     console.log(err);
+  }
+}
+
+
+
+export async function deleteCrop(req, res) {
+  const { id } = req.params
+  try {
+       await Crop.destroy({ where: { id: id } })
+      return res.status(200).json({
+          message: 'Crop deleted successfully',
+      
+      })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({
+          message: 'Something goes Wrong',
+          data: {}
+
+      })
+
   }
 }

@@ -59,3 +59,22 @@ export async function getCarrusel(req, res) {
       console.log(err);
     }
   }
+
+  export async function deleteCarrusel(req, res) {
+    const { id } = req.params
+    try {
+         await Carrusel.destroy({ where: { id: id } })
+        return res.status(200).json({
+            message: 'Carrusel deleted successfully',
+        
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'Something goes Wrong',
+            data: {}
+  
+        })
+  
+    }
+  }

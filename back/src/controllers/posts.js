@@ -29,7 +29,7 @@ export async function getPosts(req, res) {
     console.log(error);
   }
 }
-export async function putPosts(req, res) {
+export async function putPost(req, res) {
   const { name, description, image } = req.body;
   const { id } = req.params;
   try {
@@ -52,3 +52,24 @@ export async function putPosts(req, res) {
      return console.log(error);
   }
 }
+
+
+export async function deletePost(req, res) {
+  const { id } = req.params
+  try {
+       await Post.destroy({ where: { id: id } })
+      return res.status(200).json({
+          message: 'Post deleted successfully',
+      
+      })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({
+          message: 'Something goes Wrong',
+          data: {}
+
+      })
+
+  }
+}
+
