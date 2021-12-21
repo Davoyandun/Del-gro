@@ -1,7 +1,7 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
-import Crops from "../models/crop";
-import Products from "../models/product";
+import Crop from "../models/crop";
+import Product from "../models/product";
 
 
 export async function postCrop(req, res) {
@@ -14,7 +14,7 @@ export async function postCrop(req, res) {
   } = req.body;
 
 
-    let newCrop = await Crops.create({
+    let newCrop = await Crop.create({
       name,
       description,
       image,
@@ -29,10 +29,10 @@ export async function postCrop(req, res) {
 
 export async function getCrops(req, res) {
   try {
-    Crops.findAll({
+    Crop.findAll({
       include: [
         {
-          model: Products,
+          model: Product,
           attributes: ["id", "name"],
         },
       ],
@@ -44,5 +44,23 @@ export async function getCrops(req, res) {
     );
   } catch (error) {
     console.log(error);
+  }
+}
+export async function putCrops(req, res) {
+  const { name, description, image } = req.body;
+  const { id } = req.params;
+  try {
+    await Crop.update(
+      {
+        name,
+        description,
+        image,
+      },
+      { where: { id: id } }
+    );
+
+    return res.status(200).json({ message: "Crop  updated successfully" });
+  } catch (err) {
+    console.log(err);
   }
 }

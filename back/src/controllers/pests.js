@@ -1,39 +1,28 @@
 import { async } from "regenerator-runtime";
-import Sequelize from "sequelize";
-import Pests from "../models/pest";
-import Products from "../models/product";
-
-
-
+import Sequelize, { where } from "sequelize";
+import Pest from "../models/pest";
+import Product from "../models/product";
 
 export async function postPest(req, res) {
-    try {
-  const {
-    name,
-    description,
-    image,
-
-  } = req.body;
-
-    let newPest = await Pests.create({
+  const { name, description, image } = req.body;
+  try {
+    let newPest = await Pest.create({
       name,
       description,
       image,
-
     });
-    return res.json({ message: "ok", data: newPest });
+    return res.status(200).json({ message: "ok", data: newPest });
   } catch (err) {
     console.log(err);
-    res.json({ err });
   }
 }
 
 export async function getPests(req, res) {
   try {
-    Pests.findAll({
+    Pest.findAll({
       include: [
         {
-          model: Products,
+          model: Product,
           attributes: ["id", "name"],
         },
       ],
@@ -45,5 +34,24 @@ export async function getPests(req, res) {
     );
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function putPests(req, res) {
+  const { name, description, image } = req.body;
+  const { id } = req.params;
+  try {
+    await Pest.update(
+      {
+        name,
+        description,
+        image,
+      },
+      { where: { id: id } }
+    );
+
+    return res.status(200).json({ message: "Pest  updated successfully" });
+  } catch (err) {
+    console.log(err);
   }
 }

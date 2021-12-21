@@ -10,7 +10,7 @@ export default function TableCarrusel() {
     Context.getCarrusel();
   }, []);
 
-
+  
   return (
     <Container>
       <Table bordered hover size="sm" className={style.table}>

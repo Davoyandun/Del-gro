@@ -1,13 +1,10 @@
-import {Router} from 'express';
-import { postCrop , getCrops} from '../controllers/crops';
-const router = Router()
-
+import { Router } from "express";
+import { postCrop, getCrops, putCrops } from "../controllers/crops";
+const router = Router();
 
 // Routes
-router.post('/',postCrop)
-router.get('/',getCrops)
- 
+router.post("/", postCrop);
+router.get("/", getCrops);
+router.put("/:id", putCrops);
 
- 
-
-export default router
+export default router;

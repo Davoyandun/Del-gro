@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
-import Products from "../models/product";
+import Product from "../models/product";
 import Brand from "../models/brand";
 import Crop from "../models/crop";
 import Pest from "../models/pest";
@@ -21,7 +21,7 @@ export async function postProduct(req, res) {
   } = req.body;
 
   try {
-    let newProduct = await Products.create({
+    let newProduct = await Product.create({
       name,
       description,
       image,
@@ -52,23 +52,86 @@ export async function postProduct(req, res) {
   }
 }
 
-export async function getProducts (req, res){
+export async function getProducts(req, res) {
+  Product.findAll({
+    include: [
+      {
+        model: Brand,
+        attributes: ["id", "name"],
+      },
+      {
+        model: Crop,
+        attributes: ["id", "name"],
+      },
+      {
+        model: Pest,
+        attributes: ["id", "name"],
+      },
+    ],
+  }).then((response) => res.status(200).json(response));
+}
 
-  Products.findAll({
-    include:[
+export async function putProducts(req, res) {
+  const {
+    name,
+    description,
+    image,
+    presentation,
+    composition,
+    price,
+    test,
+    stock,
+    ids_brand,
+    ids_pest,
+    ids_crop,
+  } = req.body;
+  const { id } = req.params;
+
+  try {
+    await Product.update(
       {
-        model:Brand, 
-        attributes:["id", "name"]
+        name: name,
+        price: price,
+        description: description,
+        image: image,
+        stock: stock,
+        presentation: presentation,
+        composition: composition,
+        test: test,
+        stock: stock,
       },
       {
-        model:Crop, 
-        attributes:["id", "name"]
-      },
-      {
-        model:Pest, 
-        attributes:["id", "name"]
+        where: { id: id },
+        include: [{ model: Brand }, { model: Crop }, { model: Pest }],
       }
-    ]
-  }).then(response =>  res.status(200).json(response))
+    );
+    const product = await Product.findOne({
+      where: { id: id },
+      include: [{ model: Brand }, { model: Crop }, { model: Pest }],
+    });
+    if (ids_brand) {
+      var brand = await Brand.findAll({
+        where: { id: ids_brand },
+      });
+      await product.setBrands(brand);
+    }
+    if (ids_crop) {
+      var crop = await Crop.findAll({
+        where: { id: ids_crop },
+      });
+      await product.setCrops(crop);
+    }
+    if (ids_pest) {
+      var pest = await Pest.findAll({
+        where: { id: ids_pest },
+      });
+      await product.setPests(pest);
+    }
 
+    return res.json({
+      message: "Product updated successfully",
+    });
+  } catch (error) {
+    return console.log(error);
+  }
 }

@@ -1,15 +1,11 @@
-import {Router} from 'express';
-import {postBrand, getBrands} from '../controllers/brands';
+import { Router } from "express";
+import { postBrand, getBrands, putBrands } from "../controllers/brands";
 
-const router = Router()
-
+const router = Router();
 
 // Routes
-router.post('/',postBrand)
-router.get('/',getBrands)
+router.post("/", postBrand);
+router.get("/", getBrands);
+router.put("/:id", putBrands);
 
- 
-
-
-
-export default router
+export default router;

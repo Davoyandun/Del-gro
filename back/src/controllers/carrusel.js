@@ -38,3 +38,24 @@ export async function getCarrusel(req, res) {
       console.log(error);
     }
   }
+  
+
+
+  export async function putCarrusel(req, res) {
+    const { name, description, image } = req.body;
+    const { id } = req.params;
+    try {
+      await Carrusel.update(
+        {
+          name,
+          description,
+          image,
+        },
+        { where: { id: id } }
+      );
+  
+      return res.status(200).json({ message: "Carrusel  updated successfully" });
+    } catch (err) {
+      console.log(err);
+    }
+  }

@@ -1,7 +1,8 @@
 import { async } from "regenerator-runtime";
 import Sequelize from "sequelize";
-import Brands from "../models/brand";
-import Products from "../models/product";
+import Brand from "../models/brand";
+
+import Product from "../models/product";
 
 
 
@@ -9,7 +10,7 @@ export async function postBrand(req, res) {
   try {
     const { name, description, image } = req.body;
 
-    let newBrand = await Brands.create({
+    let newBrand = await Brand.create({
       name,
       description,
       image,
@@ -23,10 +24,10 @@ export async function postBrand(req, res) {
 
 export async function getBrands(req, res) {
   try {
-    Brands.findAll({
+    Brand.findAll({
       include: [
         {
-          model: Products,
+          model: Product,
           attributes: ["id", "name"],
         },
       ],
@@ -38,5 +39,25 @@ export async function getBrands(req, res) {
     );
   } catch (error) {
     console.log(error);
+  }
+}
+
+
+export async function putBrands(req, res) {
+  const { name, description, image } = req.body;
+  const { id } = req.params;
+  try {
+    await Brand.update(
+      {
+        name,
+        description,
+        image,
+      },
+      { where: { id: id } }
+    );
+
+    return res.status(200).json({ message: "Brand  updated successfully" });
+  } catch (err) {
+    console.log(err);
   }
 }
