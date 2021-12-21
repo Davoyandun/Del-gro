@@ -62,7 +62,6 @@ export async function putBrand(req, res) {
   }
 }
 
-
 export async function deleteBrand(req, res) {
   const { id } = req.params
   try {

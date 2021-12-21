@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import AgroContext from "../context/AgroContext";
+import AgroContext from "../../context/AgroContext";
 import { Table, Container, Button, Form } from "react-bootstrap";
-import style from "../styles/Tables.module.css";
+import style from "../../styles/Tables.module.css";
 
 export default function TablePests() {
     const Context = useContext(AgroContext);

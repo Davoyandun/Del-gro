@@ -5,7 +5,7 @@ import {
   clearState,
   handlerOnChange,
   verificationFormOthers,
-} from "../utils/Utils";
+} from "../../utils/Utils";
 import axios from "axios";
 import Swal from "sweetalert2";
 

@@ -1,16 +1,11 @@
 import React from 'react'
-import FormCarrusel from '../components/FormCarrusel';
-import FormProducts from '../components/FormProducts';
-import FormPosts from '../components/FormPosts';
-import FormPests from '../components/FormPests';
-import FormBrands from '../components/FormBrands';
-import FormCrops from '../components/FormCrops';
-import TableProducts from '../components/TableProducts';
-import TableCrops from '../components/TableCrops';
-import TablePests from '../components/TablePests';
-import TableBrands from '../components/TableBrands';
-import TablePosts from '../components/TablePosts';
-import TableCarrusel from '../components/TableCarrusel';
+
+import TableProducts from '../components/admin/TableProducts';
+import TableCrops from '../components/admin/TableCrops';
+import TablePests from '../components/admin/TablePests';
+import TableBrands from '../components/admin/TableBrands';
+import TablePosts from '../components/admin/TablePosts';
+import TableCarrusel from '../components/admin/TableCarrusel';
 
 
 export default function Admin() {

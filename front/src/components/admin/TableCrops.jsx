@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import AgroContext from "../context/AgroContext";
+import AgroContext from "../../context/AgroContext";
 import { Table, Container, Button, Form } from "react-bootstrap";
-import style from "../styles/Tables.module.css";
+import style from "../../styles/Tables.module.css";
 
-export default function TablePosts() {
+export default function TableCrops() {
     const Context = useContext(AgroContext);
 
   useEffect(() => {
-    Context.getPosts();
+    Context.getCrops();
   }, []);
 
 
@@ -17,16 +17,16 @@ export default function TablePosts() {
         <thead>
           <tr>
             <th>#</th>
-            <th>Titulo</th>
+            <th>Cultivo</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        {Context.posts ? (
-          Context.posts.map((post) => (
+        {Context.crops ? (
+          Context.crops.map((crop) => (
             <tbody>
               <tr>
-                <td>{post.id}</td>
-                <td>{post.name}</td>
+                <td>{crop.id}</td>
+                <td>{crop.name}</td>
   
                
                 <td>

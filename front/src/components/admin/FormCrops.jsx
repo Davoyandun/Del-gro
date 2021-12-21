@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import {
   BaseURL,
   clearState,
   handlerOnChange,
   verificationFormOthers,
-} from "../utils/Utils";
+} from "../../utils/Utils";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function FormPests() {
+export default function FormCrops() {
   const [state, setState] = useState({
     name: "",
     image: "",
@@ -20,11 +20,11 @@ export default function FormPests() {
     e.preventDefault();
     let errors = verificationFormOthers(state);
     if (Object.entries(errors).length === 0) {
-      await axios.post(`${BaseURL}pests`, state);
+      await axios.post(`${BaseURL}crops`, state);
       Swal.fire({
         icon: "success",
-        title: `Plaga agregada correctamente`,
-        text: `La plaga ${state.name} se agrego a la base de datos`,
+        title: `Cultivo agregado correctamente`,
+        text: `El cultivo ${state.name} se agrego a la base de datos`,
       });
 
       clearState(setState);
@@ -38,15 +38,17 @@ export default function FormPests() {
     }
   }
 
+
+
   return (
     <Form onSubmit={(e) => handlerSubmit(e)}>
       <Container>
-        <h3> Inserte una Plaga</h3>
+        <h3> Inserte un Cultivo</h3>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Nombre de la Plaga</Form.Label>
+          <Form.Label>Nombre del Cultivo</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Ej: Gusano Blanco"
+            placeholder="Papas"
             name="name"
             value={state.name}
             onChange={(e) => handlerOnChange(e, state, setState)}
@@ -65,17 +67,13 @@ export default function FormPests() {
           />
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Imagen de la Plaga</Form.Label>
+          <Form.Label>Imagen del Cultivo</Form.Label>
+          <Form.Control.Feedback type="valid">You did it!</Form.Control.Feedback>
           {!state.image ? (
             <output> X</output>
           ) : (
             <output>
-              <img
-                src={state.image}
-                width="45"
-                height="45"
-                alt="Img No Found"
-              ></img>
+              <img src={state.image} width="45" height="45" alt="Img No Found"></img>
             </output>
           )}
           <Form.Control
@@ -83,7 +81,9 @@ export default function FormPests() {
             accept="image/png, .jpeg, .jpg"
             name="image"
             onChange={(e) => handlerOnChange(e, state, setState)}
+
           />
+        
         </Form.Group>
 
         <Button variant="primary" type="submit">
