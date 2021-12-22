@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Row, Col, Container } from "react-bootstrap";
-import AgroContext from "../context/AgroContext";
+import AgroContext from "../../context/AgroContext";
 import {
   clearState,
   verificationFormProducts,
@@ -87,7 +87,7 @@ export default function FormProducts() {
       });
     }
   }
-
+  
   async function handlerSubmit(e) {
     e.preventDefault();
     let errors = verificationFormProducts(state);
