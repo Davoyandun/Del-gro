@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import AgroContext from "../../context/AgroContext";
-import { Table, Container, Button, Form } from "react-bootstrap";
-
+import { Table, Button, Form } from "react-bootstrap";
 import style from "../../styles/TableProducts.module.css";
 import AdminSideBar from "./AdminSideBar";
-
+import FormProducts from "./FormProducts";
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
 
 export default function TableProducts() {
   const Context = useContext(AgroContext);
-  const [modal, setModal] = useState({
-    isVisible: true,
-  });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [state, setState] = useState({
     name: "",
     description: "",
@@ -30,19 +31,7 @@ export default function TableProducts() {
     Context.getProducts();
   }, []);
 
-  function modalAction() {
-    if (modal.isVisible) {
-      return setModal({
-        ...modal,
-        isVisible: false,
-      });
-    } else {
-      return setModal({
-        ...modal,
-        isVisible: true,
-      });
-    }
-  }
+ 
   function handlerEdit(product) {
     setState({
       ...state,
@@ -58,7 +47,7 @@ export default function TableProducts() {
       ids_pest: product.pests.map((pest) => pest.id),
       ids_crop: product.crops.map((crop) => crop.id),
     });
-    modalAction();
+    
   }
 
   function handlerBrand(e) {
@@ -120,7 +109,9 @@ export default function TableProducts() {
       </div>
 
       <div className={style.tableContainer}>
-        
+        <div className={style.buttonAdd}>
+          <Button onClick={handleShow} > Agregar Producto</Button>
+        </div>
         <Table bordered hover size="sm" className={style.table}>
           <thead>
             <tr>
@@ -169,6 +160,11 @@ export default function TableProducts() {
           )}
         </Table>
       </div>
+      <FormProducts
+       show={show}
+       handleClose={handleClose}
+      
+      />
     </div>
   );
 }
