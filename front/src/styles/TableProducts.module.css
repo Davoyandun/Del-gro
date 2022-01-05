@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  background-color: cadetblue;
+  flex-direction: row;
+}
+.tableContainer {
+  margin-left: 300px;
+  margin-top: 30px;
+}

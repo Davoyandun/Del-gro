@@ -26,12 +26,12 @@ app.use(cors())
 
 
 //routes
-app.use('/products',productRoutes);
 app.use('/brands',brandRoutes);
 app.use('/pests',pestRoutes);
 app.use('/crops',cropRoutes);
 app.use('/posts',postRoutes);
 app.use('/carrusel',carruselRoutes);
+app.use('/products',productRoutes);
 
 
 

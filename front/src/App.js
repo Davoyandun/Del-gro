@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // Components
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
+import TableProducts from './components/admin/TableProducts'
 
 function App() {
   return (
@@ -12,7 +12,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<TableProducts />} />
+          
+     
+
         </Routes>
       </BrowserRouter>
     </AgroState>

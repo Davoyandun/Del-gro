@@ -53,22 +53,26 @@ export async function postProduct(req, res) {
 }
 
 export async function getProducts(req, res) {
-  Product.findAll({
-    include: [
-      {
-        model: Brand,
-        attributes: ["id", "name"],
-      },
-      {
-        model: Crop,
-        attributes: ["id", "name"],
-      },
-      {
-        model: Pest,
-        attributes: ["id", "name"],
-      },
-    ],
-  }).then((response) => res.status(200).json(response));
+  try {
+    Product.findAll({
+      include: [
+        {
+          model: Brand,
+          attributes: ["id", "name"],
+        },
+        {
+          model: Crop,
+          attributes: ["id", "name"],
+        },
+        {
+          model: Pest,
+          attributes: ["id", "name"],
+        },
+      ],
+    }).then((response) => res.status(200).json(response));
+  } catch (error) {
+    return console.log(error);
+  }
 }
 
 export async function putProduct(req, res) {
@@ -137,20 +141,17 @@ export async function putProduct(req, res) {
 }
 
 export async function deleteProduct(req, res) {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-       await Product.destroy({ where: { id: id } })
-      return res.status(200).json({
-          message: 'Product deleted successfully',
-      
-      })
+    await Product.destroy({ where: { id: id } });
+    return res.status(200).json({
+      message: "Product deleted successfully",
+    });
   } catch (err) {
-      console.log(err)
-      res.status(500).json({
-          message: 'Something goes Wrong',
-          data: {}
-
-      })
-
+    console.log(err);
+    res.status(500).json({
+      message: "Something goes Wrong",
+      data: {},
+    });
   }
 }
