@@ -131,6 +131,33 @@ export default function TableProducts() {
       });
     }
   }
+  async function handlerStock(product,event) {
+  
+    await axios.put(`${BaseURL}products/${product.id}`, 
+    {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      image: product.image,
+      presentation: product.presentation,
+      composition: product.composition,
+      price: product.price,
+      test: product.test,
+      stock: event.target.checked,
+      ids_brand: product.brands.map((brand) => brand.id),
+      ids_pest: product.pests.map((pest) => pest.id),
+      ids_crop: product.crops.map((crop) => crop.id),
+    }).then(()=>Context.getProducts()).catch(()=> {
+      Swal.fire({
+        icon: "erro",
+        title: "no se pudo actualizar",
+        text: "Algo salio mal, intenta nuevamente",
+      });
+
+    })
+
+
+  }
 
   async function handlerDelete(product, event) {
     event.preventDefault();
@@ -160,7 +187,7 @@ export default function TableProducts() {
     });
   }
 
-  console.log(Context.products);
+ 
 
   return (
     <div className={style.container}>
@@ -190,10 +217,12 @@ export default function TableProducts() {
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>
-                    <div>{product.stok}</div>
-                    <div>
-                      <Form.Check type="switch" id="custom-switch" />
-                    </div>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      checked={product.stock}
+                      onChange={(event) => handlerStock(product,event)}
+                    />
                   </td>
                   <td>
                     <Button onClick={() => handlerEdit(product)}>
