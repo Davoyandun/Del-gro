@@ -1,19 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import AgroContext from "../../context/AgroContext";
+import { MdModeEditOutline, MdDelete } from "react-icons/md";
 import { Table, Button, Form } from "react-bootstrap";
+import axios from "axios";
+import Swal from "sweetalert2";
+import AgroContext from "../../context/AgroContext";
 import style from "../../styles/TableProducts.module.css";
 import AdminSideBar from "./AdminSideBar";
 import FormProducts from "./FormProducts";
-import { MdModeEditOutline, MdDelete } from "react-icons/md";
+import FormEditProducts from "./FormEditProducts";
+import {
+  clearState,
+  verificationFormProducts,
+  BaseURL,
+} from "../../utils/Utils";
 
 export default function TableProducts() {
   const Context = useContext(AgroContext);
+  //modales
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [showEdit, setShowEdit] = useState(false);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
+
   const [state, setState] = useState({
+    id: "",
     name: "",
     description: "",
     image: "",
@@ -31,10 +44,10 @@ export default function TableProducts() {
     Context.getProducts();
   }, []);
 
- 
   function handlerEdit(product) {
     setState({
       ...state,
+      id: product.id,
       name: product.name,
       description: product.description,
       image: product.image,
@@ -47,60 +60,107 @@ export default function TableProducts() {
       ids_pest: product.pests.map((pest) => pest.id),
       ids_crop: product.crops.map((crop) => crop.id),
     });
-    
+
+    handleShowEdit();
   }
 
-  function handlerBrand(e) {
-    if (e.target.checked) {
-      if (!state.ids_brand.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_brand: [...state.ids_brand, parseInt(e.target.value)],
+  async function handlerSubmit(e) {
+    e.preventDefault();
+    let errors = verificationFormProducts(state);
+    if (Object.entries(errors).length === 0) {
+      await axios
+        .post(`${BaseURL}products`, state)
+        .then(() => {
+          handleClose();
+          Swal.fire({
+            icon: "success",
+            title: `Producto agregado correctamente`,
+            text: `El producto ${state.name} se agrego a la base de datos`,
+          });
+          clearState(setState);
+        })
+        .catch((error) => {
+          handleClose();
+          Swal.fire({
+            icon: "error",
+            title: `Algo salio mal`,
+            text: error,
+          });
+          clearState(setState);
         });
-      }
     } else {
-      setState({
-        ...state,
-        ids_brand: [
-          ...state.ids_brand.filter((id) => id !== parseInt(e.target.value)),
-        ],
+      errors = Object.values(errors);
+      Swal.fire({
+        icon: "warning",
+        title: "Espacios vacios en el formulario",
+        text: errors.toString(),
       });
     }
   }
-  function handlerCrop(e) {
-    if (e.target.checked) {
-      if (!state.ids_crop.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_crop: [...state.ids_crop, parseInt(e.target.value)],
+
+  async function handlerSubmitEdit(e) {
+    e.preventDefault();
+    let errors = verificationFormProducts(state);
+    if (Object.entries(errors).length === 0) {
+      await axios
+        .put(`${BaseURL}products/${state.id}`, state)
+        .then(() => {
+          handleCloseEdit();
+          Swal.fire({
+            icon: "success",
+            title: `Producto se modifico correctamente`,
+            text: `El producto ${state.name} ha sido modificado`,
+          });
+          clearState(setState);
+        })
+        .catch((error) => {
+          handleCloseEdit();
+          Swal.fire({
+            icon: "error",
+            title: `Algo salio mal`,
+            text: error,
+          });
+          clearState(setState);
         });
-      }
     } else {
-      setState({
-        ...state,
-        ids_crop: [
-          ...state.ids_crop.filter((id) => id !== parseInt(e.target.value)),
-        ],
+      errors = Object.values(errors);
+      Swal.fire({
+        icon: "warning",
+        title: "Espacios vacios en el formulario",
+        text: errors.toString(),
       });
     }
   }
-  function handlerPest(e) {
-    if (e.target.checked) {
-      if (!state.ids_pest.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_pest: [...state.ids_pest, parseInt(e.target.value)],
-        });
+
+  async function handlerDelete(product, event) {
+    event.preventDefault();
+    Swal.fire({
+      title: `Eliminar ${product.name}`,
+      showCancelButton: true,
+      showDenyButton: true,
+      denyButtonText: `Conservar`,
+      confirmButtonText: "Eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${BaseURL}products/${product.id}`)
+          .then(() => {
+            Swal.fire("Eliminado!", "", "success");
+          })
+          .catch(() => {
+            Swal.fire(
+              "Algo salio mal, no se pudo eliminar el producto!",
+              "",
+              "warning"
+            );
+          });
+      } else if (result.isDenied) {
+        Swal.fire("El producto sigue disponible", "", "info");
       }
-    } else {
-      setState({
-        ...state,
-        ids_pest: [
-          ...state.ids_pest.filter((id) => id !== parseInt(e.target.value)),
-        ],
-      });
-    }
+    });
   }
+
+  console.log(Context.products);
 
   return (
     <div className={style.container}>
@@ -110,7 +170,7 @@ export default function TableProducts() {
 
       <div className={style.tableContainer}>
         <div className={style.buttonAdd}>
-          <Button onClick={handleShow} > Agregar Producto</Button>
+          <Button onClick={handleShow}> Agregar Producto</Button>
         </div>
         <Table bordered hover size="sm" className={style.table}>
           <thead>
@@ -140,7 +200,10 @@ export default function TableProducts() {
                       <MdModeEditOutline />
                     </Button>
 
-                    <Button>
+                    <Button
+                      color="danger text-dark bg-danger "
+                      onClick={(event) => handlerDelete(product, event)}
+                    >
                       <MdDelete />
                     </Button>
                   </td>
@@ -161,9 +224,22 @@ export default function TableProducts() {
         </Table>
       </div>
       <FormProducts
-       show={show}
-       handleClose={handleClose}
-      
+        show={show}
+        handleClose={handleClose}
+        Context={Context}
+        state={state}
+        setState={setState}
+        handlerSubmit={handlerSubmit}
+      />
+
+      <FormEditProducts
+        product={state}
+        show={showEdit}
+        handleClose={handleCloseEdit}
+        state={state}
+        setState={setState}
+        handlerSubmit={handlerSubmitEdit}
+        Context={Context}
       />
     </div>
   );

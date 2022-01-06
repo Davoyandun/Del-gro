@@ -75,4 +75,56 @@ export   async function handlerOnChange(e, state, setState) {
   }
 }
 
+export function handlerBrand(e, state, setState) {
+  if (e.target.checked) {
+    if (!state.ids_brand.includes(parseInt(e.target.value))) {
+      setState({
+        ...state,
+        ids_brand: [...state.ids_brand, parseInt(e.target.value)],
+      });
+    }
+  } else {
+    setState({
+      ...state,
+      ids_brand: [
+        ...state.ids_brand.filter((id) => id !== parseInt(e.target.value)),
+      ],
+    });
+  }
+}
 
+
+ export function handlerCrop(e, state, setState) {
+  if (e.target.checked) {
+    if (!state.ids_crop.includes(parseInt(e.target.value))) {
+      setState({
+        ...state,
+        ids_crop: [...state.ids_crop, parseInt(e.target.value)],
+      });
+    }
+  } else {
+    setState({
+      ...state,
+      ids_crop: [
+        ...state.ids_crop.filter((id) => id !== parseInt(e.target.value)),
+      ],
+    });
+  }
+}
+ export function handlerPest(e, state, setState) {
+  if (e.target.checked) {
+    if (!state.ids_pest.includes(parseInt(e.target.value))) {
+      setState({
+        ...state,
+        ids_pest: [...state.ids_pest, parseInt(e.target.value)],
+      });
+    }
+  } else {
+    setState({
+      ...state,
+      ids_pest: [
+        ...state.ids_pest.filter((id) => id !== parseInt(e.target.value)),
+      ],
+    });
+  }
+}

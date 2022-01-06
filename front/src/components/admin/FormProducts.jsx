@@ -1,33 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Row, Col, Container, Modal } from "react-bootstrap";
-import AgroContext from "../../context/AgroContext";
+
 import {
-  clearState,
-  verificationFormProducts,
   handlerOnChange,
-  BaseURL,
+  handlerBrand,
+  handlerCrop,
+  handlerPest,
 } from "../../utils/Utils";
 
-import axios from "axios";
-import Swal from "sweetalert2";
-
-export default function FormProducts({show, handleClose}) {
-  const Context = useContext(AgroContext);
-
-  const [state, setState] = useState({
-    name: "",
-    description: "",
-    image: "",
-    presentation: " ",
-    composition: "",
-    price: "",
-    test: " ",
-    stock: true,
-    ids_brand: [],
-    ids_pest: [],
-    ids_crop: [],
-  });
-
+export default function FormProducts({
+  show,
+  handleClose,
+  Context,
+  state,
+  setState,
+  handlerSubmit,
+}) {
   useEffect(() => {
     Context.getCrops();
     Context.getBrands();
@@ -36,84 +24,10 @@ export default function FormProducts({show, handleClose}) {
 
   // handles
 
-  function handlerBrand(e) {
-    if (e.target.checked) {
-      if (!state.ids_brand.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_brand: [...state.ids_brand, parseInt(e.target.value)],
-        });
-      }
-    } else {
-      setState({
-        ...state,
-        ids_brand: [
-          ...state.ids_brand.filter((id) => id !== parseInt(e.target.value)),
-        ],
-      });
-    }
-  }
-  function handlerCrop(e) {
-    if (e.target.checked) {
-      if (!state.ids_crop.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_crop: [...state.ids_crop, parseInt(e.target.value)],
-        });
-      }
-    } else {
-      setState({
-        ...state,
-        ids_crop: [
-          ...state.ids_crop.filter((id) => id !== parseInt(e.target.value)),
-        ],
-      });
-    }
-  }
-  function handlerPest(e) {
-    if (e.target.checked) {
-      if (!state.ids_pest.includes(parseInt(e.target.value))) {
-        setState({
-          ...state,
-          ids_pest: [...state.ids_pest, parseInt(e.target.value)],
-        });
-      }
-    } else {
-      setState({
-        ...state,
-        ids_pest: [
-          ...state.ids_pest.filter((id) => id !== parseInt(e.target.value)),
-        ],
-      });
-    }
-  }
-
-  async function handlerSubmit(e) {
-    e.preventDefault();
-    let errors = verificationFormProducts(state);
-    if (Object.entries(errors).length === 0) {
-      await axios.post(`${BaseURL}products`, state);
-      Swal.fire({
-        icon: "success",
-        title: `Producto agregado correctamente`,
-        text: `El producto ${state.name} se agrego a la base de datos`,
-      });
-
-      clearState(setState);
-    } else {
-      errors = Object.values(errors);
-      Swal.fire({
-        icon: "warning",
-        title: "Espacios vacios en el formulario",
-        text: errors.toString(),
-      });
-    }
-  }
-
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title> Crear Nuevo Producto</Modal.Title>
+        <Modal.Title> Agregar Nuevo Producto</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={(e) => handlerSubmit(e)}>
@@ -225,7 +139,7 @@ export default function FormProducts({show, handleClose}) {
                         name={crop.name}
                         key={crop.id}
                         value={crop.id}
-                        onChange={(e) => handlerCrop(e)}
+                        onChange={(e) => handlerCrop(e, state, setState)}
                       />
                     ))
                   ) : (
@@ -247,7 +161,7 @@ export default function FormProducts({show, handleClose}) {
                         name={brand.name}
                         key={brand.id}
                         value={brand.id}
-                        onChange={(e) => handlerBrand(e)}
+                        onChange={(e) => handlerBrand(e, state, setState)}
                       />
                     ))
                   ) : (
@@ -268,7 +182,7 @@ export default function FormProducts({show, handleClose}) {
                         name={pest.name}
                         key={pest.id}
                         value={pest.id}
-                        onChange={(e) => handlerPest(e)}
+                        onChange={(e) => handlerPest(e, state, setState)}
                       />
                     ))
                   ) : (
@@ -277,14 +191,12 @@ export default function FormProducts({show, handleClose}) {
                 </Col>
               </Form.Group>
             </Row>
+            <Button variant="primary" type="submit">
+              Agregar
+            </Button>
           </Container>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }

@@ -1,35 +1,30 @@
 import React from "react";
-import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Row, Col, Container, Modal } from "react-bootstrap";
-import AgroContext from "../../context/AgroContext";
+
 import {
-  clearState,
-  verificationFormProducts,
   handlerOnChange,
-  BaseURL,
+  handlerBrand,
+  handlerCrop,
+  handlerPest,
 } from "../../utils/Utils";
-
-
-
-export default function FormEditProducts({ product, modal, modalAction }) {
-
-
-    const Context = useContext(AgroContext);
-    
+export default function FormEditProducts({
+  product,
+  show,
+  handleClose,
+  state,
+  setState,
+  handlerSubmit,
+  Context
+}) {
+ console.log(state)
   return (
-    <Modal
-      show={modal.isVisible}
-      onHide={() => modalAction()}
-      backdrop="static"
-      keyboard={true}
-    >
-      <Modal.Header >
+    <Modal show={show} onHide={handleClose} size="lg">
+      <Modal.Header closeButton>
         <Modal.Title>Editar {product.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={(e) => handlerSubmit(e)}>
           <Container>
-         
             <Row className="mb-3">
               <Form.Group as={Col}>
                 <Form.Label>Nombre</Form.Label>
@@ -123,6 +118,9 @@ export default function FormEditProducts({ product, modal, modalAction }) {
                 onChange={(e) => handlerOnChange(e, state, setState)}
               />
             </Form.Group>
+
+            {/* checkbox */}
+
             <Row className="mb-3">
               <Form.Group as={Col} className="mb-3">
                 <Form.Label as="legend" column sm={2}>
@@ -133,11 +131,14 @@ export default function FormEditProducts({ product, modal, modalAction }) {
                     Context.crops.map((crop) => (
                       <Form.Check
                         type="checkbox"
+                        value={crop.id}
                         label={crop.name}
                         name={crop.name}
                         key={crop.id}
-                        value={crop.id}
-                        onChange={(e) => handlerCrop(e)}
+                        onChange={(e) => handlerCrop(e, state, setState)}
+                        checked={
+                          product.ids_crop.includes(crop.id) ? true : false
+                        }
                       />
                     ))
                   ) : (
@@ -159,7 +160,10 @@ export default function FormEditProducts({ product, modal, modalAction }) {
                         name={brand.name}
                         key={brand.id}
                         value={brand.id}
-                        onChange={(e) => handlerBrand(e)}
+                        onChange={(e) => handlerBrand(e, state, setState)}
+                        checked={
+                          product.ids_brand.includes(brand.id) ? true : false
+                        }
                       />
                     ))
                   ) : (
@@ -180,7 +184,10 @@ export default function FormEditProducts({ product, modal, modalAction }) {
                         name={pest.name}
                         key={pest.id}
                         value={pest.id}
-                        onChange={(e) => handlerPest(e)}
+                        onChange={(e) => handlerPest(e, state, setState)}
+                        checked={
+                          product.ids_pest.includes(pest.id) ? true : false
+                        }
                       />
                     ))
                   ) : (
