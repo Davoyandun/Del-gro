@@ -8,6 +8,7 @@ import {
   handlertElementEditOpen,
   handlerSubmitOthers,
   handlerSubmitEditOthers,
+  handlerDelete,
 } from "../../utils/Utils";
 
 export default function TableCrops() {
@@ -77,7 +78,14 @@ export default function TableCrops() {
                       >
                         Editar
                       </Button>
-                      <Button>Eliminar</Button>
+                      <Button    onClick={(event) =>
+                        handlerDelete(
+                          event,
+                          crop,
+                          "crops",
+                          Context.getCrops
+                        )
+                      }>Eliminar</Button>
                     </td>
                   </tr>
                 </tbody>

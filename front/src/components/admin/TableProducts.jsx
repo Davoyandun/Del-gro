@@ -210,7 +210,7 @@ export default function TableProducts() {
                         )
                       }
                     >
-                      <MdDelete />
+                      Eliminar
                     </Button>
                   </td>
                 </tr>

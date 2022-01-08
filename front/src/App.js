@@ -4,11 +4,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // Components
 import Home from "./pages/Home";
-import TableProducts from './components/admin/TableProducts'
+import TableProducts from "./components/admin/TableProducts";
 
 import TableCrops from "./components/admin/TableCrops";
 import TableBrands from "./components/admin/TableBrands";
 import TablePests from "./components/admin/TablePests";
+import TablePosts from "./components/admin/TablePosts";
+import TableCarrusel from "./components/admin/TableCarrusel";
 
 function App() {
   return (
@@ -20,15 +22,12 @@ function App() {
           <Route path="/admin/crops" element={<TableCrops />} />
           <Route path="/admin/brands" element={<TableBrands />} />
           <Route path="/admin/pests" element={<TablePests />} />
-
-          
-     
-
+          <Route path="/admin/posts" element={<TablePosts />} />
+          <Route path="/admin/carrusel" element={<TableCarrusel />} />
         </Routes>
       </BrowserRouter>
     </AgroState>
   );
 }
-
 
 export default App;

@@ -9,6 +9,7 @@ import {
   handlertElementEditOpen,
   handlerSubmitOthers,
   handlerSubmitEditOthers,
+  handlerDelete,
 } from "../../utils/Utils";
 
 export default function TablePests() {
@@ -72,7 +73,14 @@ export default function TablePests() {
                               handleShowEdit
                             )
                           }>Editar</Button>
-                      <Button>Eliminar</Button>
+                       <Button    onClick={(event) =>
+                        handlerDelete(
+                          event,
+                          pest,
+                          "pests",
+                          Context.getPests
+                        )
+                      }>Eliminar</Button>
                     </td>
                   </tr>
                 </tbody>

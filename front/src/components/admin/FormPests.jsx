@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Button, Container, Modal } from "react-bootstrap";
-import { MdOutlineRefresh } from "react-icons/md";
+
 import { handlerOnChange,  } from "../../utils/Utils";
 
-export default function FormCrops({
+export default function FormPests({
   tittle,
   show,
   handleClose,

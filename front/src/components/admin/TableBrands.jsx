@@ -8,6 +8,7 @@ import {
   handlertElementEditOpen,
   handlerSubmitOthers,
   handlerSubmitEditOthers,
+  handlerDelete,
 } from "../../utils/Utils";
 
 export default function TableBrands() {
@@ -71,7 +72,14 @@ export default function TableBrands() {
                           handleShowEdit
                         )
                       }>Editar</Button>
-                      <Button>Eliminar</Button>
+                      <Button    onClick={(event) =>
+                        handlerDelete(
+                          event,
+                          brand,
+                          "brands",
+                          Context.getBrands
+                        )
+                      }>Eliminar</Button>
                     </td>
                   </tr>
                 </tbody>
