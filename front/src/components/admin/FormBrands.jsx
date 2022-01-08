@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Modal } from "react-bootstrap";
-import { handlerOnChange, handlerSubmitOthers } from "../../utils/Utils";
+import { handlerOnChange } from "../../utils/Utils";
 
 
 export default function FormBrands({

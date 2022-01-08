@@ -37,7 +37,7 @@ export default function TableCrops() {
   useEffect(() => {
     Context.getCrops();
   }, [ handlerSubmitOthers,
-    handlerSubmitEditOthers,]);
+    handlerSubmitEditOthers,handlerDelete]);
 
   return (
     <div className={style.container}>

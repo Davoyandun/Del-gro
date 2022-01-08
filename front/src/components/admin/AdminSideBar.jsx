@@ -46,7 +46,7 @@ export default function AdminSideBar() {
         </ul>
         <footer className="footer">
           <p>
-            <NavLink to="/contact" className={style.item} exact>
+            <NavLink to="/" className={style.item} exact>
               salir
             </NavLink>
             Developer <b>David Yandun</b>  <br/>

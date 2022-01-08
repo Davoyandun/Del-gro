@@ -34,7 +34,8 @@ export default function TableCarrusel() {
 
   useEffect(() => {
     Context.getCarrusel();
-  }, []);
+  }, [handlerSubmitOthers,
+    handlerSubmitEditOthers,handlerDelete]);
 
   return (
     <div className={style.container}>

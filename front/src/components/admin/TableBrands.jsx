@@ -34,7 +34,14 @@ export default function TableBrands() {
 
   useEffect(() => {
     Context.getBrands();
-  }, []);
+  }, [handlerDelete,
+    handlerSubmitOthers,
+    handlerSubmitEditOthers,
+  ]);
+
+
+
+
 
   return (
     <div className={style.container}>
@@ -72,12 +79,13 @@ export default function TableBrands() {
                           handleShowEdit
                         )
                       }>Editar</Button>
+
                       <Button    onClick={(event) =>
                         handlerDelete(
                           event,
                           brand,
                           "brands",
-                          Context.getBrands
+                         Context.getBrands
                         )
                       }>Eliminar</Button>
                     </td>
