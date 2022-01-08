@@ -14,7 +14,7 @@ export default function AdminSideBar() {
         </div>
         <ul className={style.navItems}>
           <li className={style.navItem}>
-            <NavLink to="/admin/products" className={style.item} exact>
+            <NavLink to="/admin" className={style.item} exact>
               Productos
             </NavLink>
           </li>

@@ -7,11 +7,12 @@ import AgroContext from "../../context/AgroContext";
 import style from "../../styles/TableProducts.module.css";
 import AdminSideBar from "./AdminSideBar";
 import FormProducts from "./FormProducts";
-import FormEditProducts from "./FormEditProducts";
+import FormEditProducts from "./EditFormProducts";
 import {
   clearState,
   verificationFormProducts,
   BaseURL,
+  handlerDelete,
 } from "../../utils/Utils";
 
 export default function TableProducts() {
@@ -122,6 +123,7 @@ export default function TableProducts() {
           });
           clearState(setState);
         });
+        Context.getProducts()
     } else {
       errors = Object.values(errors);
       Swal.fire({
@@ -131,63 +133,31 @@ export default function TableProducts() {
       });
     }
   }
-  async function handlerStock(product,event) {
-  
-    await axios.put(`${BaseURL}products/${product.id}`, 
-    {
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      image: product.image,
-      presentation: product.presentation,
-      composition: product.composition,
-      price: product.price,
-      test: product.test,
-      stock: event.target.checked,
-      ids_brand: product.brands.map((brand) => brand.id),
-      ids_pest: product.pests.map((pest) => pest.id),
-      ids_crop: product.crops.map((crop) => crop.id),
-    }).then(()=>Context.getProducts()).catch(()=> {
-      Swal.fire({
-        icon: "erro",
-        title: "no se pudo actualizar",
-        text: "Algo salio mal, intenta nuevamente",
+  async function handlerStock(product, event) {
+    await axios
+      .put(`${BaseURL}products/${product.id}`, {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        image: product.image,
+        presentation: product.presentation,
+        composition: product.composition,
+        price: product.price,
+        test: product.test,
+        stock: event.target.checked,
+        ids_brand: product.brands.map((brand) => brand.id),
+        ids_pest: product.pests.map((pest) => pest.id),
+        ids_crop: product.crops.map((crop) => crop.id),
+      })
+      .then(() => Context.getProducts())
+      .catch(() => {
+        Swal.fire({
+          icon: "erro",
+          title: "no se pudo actualizar",
+          text: "Algo salio mal, intenta nuevamente",
+        });
       });
-
-    })
-
-
   }
-
-  async function handlerDelete(product, event) {
-    event.preventDefault();
-    Swal.fire({
-      title: `Eliminar ${product.name}`,
-      showCancelButton: true,
-      showDenyButton: true,
-      denyButtonText: `Conservar`,
-      confirmButtonText: "Eliminar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .delete(`${BaseURL}products/${product.id}`)
-          .then(() => {
-            Swal.fire("Eliminado!", "", "success");
-          })
-          .catch(() => {
-            Swal.fire(
-              "Algo salio mal, no se pudo eliminar el producto!",
-              "",
-              "warning"
-            );
-          });
-      } else if (result.isDenied) {
-        Swal.fire("El producto sigue disponible", "", "info");
-      }
-    });
-  }
-
- 
 
   return (
     <div className={style.container}>
@@ -221,7 +191,7 @@ export default function TableProducts() {
                       type="switch"
                       id="custom-switch"
                       checked={product.stock}
-                      onChange={(event) => handlerStock(product,event)}
+                      onChange={(event) => handlerStock(product, event)}
                     />
                   </td>
                   <td>
@@ -231,7 +201,14 @@ export default function TableProducts() {
 
                     <Button
                       color="danger text-dark bg-danger "
-                      onClick={(event) => handlerDelete(product, event)}
+                      onClick={(event) =>
+                        handlerDelete(
+                          event,
+                          product,
+                          "products",
+                          Context.getProducts
+                        )
+                      }
                     >
                       <MdDelete />
                     </Button>

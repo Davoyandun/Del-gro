@@ -6,6 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import TableProducts from './components/admin/TableProducts'
 
+import TableCrops from "./components/admin/TableCrops";
+import TableBrands from "./components/admin/TableBrands";
+import TablePests from "./components/admin/TablePests";
+
 function App() {
   return (
     <AgroState>
@@ -13,6 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<TableProducts />} />
+          <Route path="/admin/crops" element={<TableCrops />} />
+          <Route path="/admin/brands" element={<TableBrands />} />
+          <Route path="/admin/pests" element={<TablePests />} />
+
           
      
 
