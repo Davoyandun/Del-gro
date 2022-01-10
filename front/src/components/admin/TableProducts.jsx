@@ -43,7 +43,7 @@ export default function TableProducts() {
 
   useEffect(() => {
     Context.getProducts();
-  }, [handlerDelete, handlerSubmit, handlerSubmitEdit ]);
+  }, []);
 
   function handlerEdit(product) {
     setState({

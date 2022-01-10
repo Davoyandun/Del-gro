@@ -35,8 +35,7 @@ export default function TablePests() {
 
   useEffect(() => {
     Context.getPests();
-  }, [handlerSubmitOthers,
-    handlerSubmitEditOthers,handlerDelete]);
+  }, []);
 
   return (
     <div className={style.container}>

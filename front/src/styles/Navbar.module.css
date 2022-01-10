@@ -24,11 +24,11 @@
   padding: 8px 12px;
   border-radius: 3px;
 }
-.logo {
+.imagen {
   font-size: 30px;
   padding: 0 40px;
-  font-weight: bold;
-  line-height: 90px;
+  width: "120px";
+  height: "120px";
 }
 .list {
   display: flex;
@@ -36,18 +36,19 @@
   list-style: none;
 }
 .item {
-    display: flex;
-  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
   margin: 0 10px;
   line-height: 20px;
   text-transform: uppercase;
   width: max-content;
-  justify-content: center;
+
+  text-align: center;
 }
 .text {
   color: rgb(0, 0, 0);
   justify-content: center;
-
 }
 .text:hover {
   color: rgb(255, 0, 0);
@@ -65,16 +66,14 @@
   cursor: pointer;
   display: none;
 }
-.icon{
-    color: red;
-    justify-content: center;
-   
+.icon {
+  color: red;
+  justify-content: center;
 }
 
-.text:hover{
-    color: red;}
-
-
+.text:hover {
+  color: red;
+}
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -84,9 +83,7 @@
     font-family: sans-serif;
   }
   .header {
-
     height: 70px;
-   
   }
 
   .logo {
@@ -105,7 +102,7 @@
     padding: 20px 0;
     height: calc(100% - 60px);
     overflow-y: auto;
- left: 100%; 
+    left: 100%;
     transition: left 0.3s;
   }
 
@@ -126,10 +123,10 @@
   /* toggle  */
 
   .toggle {
-  display: block;
+    display: block;
   }
   .visible {
-    left: 0%; 
-
+    left: 0%;
   }
+
 }

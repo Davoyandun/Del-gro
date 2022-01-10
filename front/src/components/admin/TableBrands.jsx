@@ -34,9 +34,7 @@ export default function TableBrands() {
 
   useEffect(() => {
     Context.getBrands();
-  }, [handlerDelete,
-    handlerSubmitOthers,
-    handlerSubmitEditOthers,
+  }, [
   ]);
 
 

@@ -35,8 +35,7 @@ export default function TablePosts() {
 
   useEffect(() => {
     Context.getPosts();
-  }, [handlerSubmitOthers,
-    handlerSubmitEditOthers,handlerDelete]);
+  }, []);
 
   return (
     <div className={style.container}>
