@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MdModeEditOutline, MdDelete } from "react-icons/md";
+import { MdModeEditOutline,  } from "react-icons/md";
 import { Table, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";

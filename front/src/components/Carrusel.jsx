@@ -10,13 +10,13 @@ export default function Carrusel() {
     Context.getCarrusel();
   }, []);
 
-  console.log(Context.carrusel);
+
 
   return (
     <Carousel fade>
       {Context.carrusel ? (
         Context.carrusel.map((carrusel, i) => (
-          <Carousel.Item interval={5000}>
+          <Carousel.Item interval={5000} key ={i}>
             <img
               className="d-block w-100"
               src={carrusel.image}

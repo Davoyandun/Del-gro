@@ -13,7 +13,7 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" variant="light" bg ="light ">
       <Container>
         <Navbar.Brand href="/">
-          <img className="Logo" src={Logo} alt="Imagen No Encontrada" />
+          <img className={style.logo} src={Logo} alt="Imagen No Encontrada" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
         <Navbar.Collapse id="navbarScroll">
