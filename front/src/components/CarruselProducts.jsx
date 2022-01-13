@@ -4,7 +4,6 @@ import AgroContext from "../context/AgroContext";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
 import "../styles/CarruselProducts.css";
-import context from "react-bootstrap/esm/AccordionContext";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -22,7 +21,7 @@ export default function CarruselProducts() {
   useEffect(() => {
     Context.getProducts();
    
-  }, []);
+  }, [items]);
   return (
     <div className="container">
   
