@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import iconProducts from "../styles/images/iconProducts.svg";
 import iconAbout from "../styles/images/iconAbout.svg";
 import iconBlog from "../styles/images/iconBlog.svg";
@@ -10,23 +11,25 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" variant="light" bg ="light ">
+    <Navbar collapseOnSelect expand="lg" variant="light" bg="light ">
       <Container>
-        <Navbar.Brand href="/">
-          <img className={style.logo} src={Logo} alt="Imagen No Encontrada" />
+        <Navbar.Brand>
+          <NavLink to='/'>
+            <img className={style.logo} src={Logo} alt="Imagen No Encontrada" />
+          </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
-            <Nav.Link href="/products" className={style.item}>
+            <NavLink to="/products" className={style.item}>
               <img
                 className={style.imagen}
                 src={iconProducts}
                 alt="Imagen No Encontrada"
               />
               <h5 className={style.text}>Productos</h5>
-            </Nav.Link>
-            <Nav.Link href="/blog" className={style.item}>
+            </NavLink>
+            <NavLink to="/blog" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
@@ -34,8 +37,8 @@ export default function NavBar() {
                 alt="Imagen No Encontrada"
               />
               <h5 className={style.text}>Noticias</h5>
-            </Nav.Link>
-            <Nav.Link href="/blog" className={style.item}>
+            </NavLink>
+            <NavLink to="/blog" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
@@ -43,8 +46,8 @@ export default function NavBar() {
                 alt="Imagen No Encontrada"
               />
               <h5 className={style.text}>Nosotros</h5>
-            </Nav.Link>
-            <Nav.Link href="/blog" className={style.item}>
+            </NavLink>
+            <NavLink to="/blog" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
@@ -52,7 +55,7 @@ export default function NavBar() {
                 alt="Imagen No Encontrada"
               />
               <h5 className={style.text}>Contactos</h5>
-            </Nav.Link>
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

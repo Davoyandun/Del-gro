@@ -11,19 +11,26 @@ import TableBrands from "./components/admin/TableBrands";
 import TablePests from "./components/admin/TablePests";
 import TablePosts from "./components/admin/TablePosts";
 import TableCarrusel from "./components/admin/TableCarrusel";
+import NavBar from "./components/NavBar";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
     <AgroState>
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<TableProducts />} />
-          <Route path="/admin/crops" element={<TableCrops />} />
-          <Route path="/admin/brands" element={<TableBrands />} />
-          <Route path="/admin/pests" element={<TablePests />} />
-          <Route path="/admin/posts" element={<TablePosts />} />
-          <Route path="/admin/carrusel" element={<TableCarrusel />} />
+        </Routes>
+        <Routes>
+          <Route path="/admin/*" element={<Admin />}>
+            <Route path="" element={<TableProducts />} />
+            <Route path="crops" element={<TableCrops />} />
+            <Route path="brands" element={<TableBrands />} />
+            <Route path="pests" element={<TablePests />} />
+            <Route path="posts" element={<TablePosts />} />
+            <Route path="carrusel" element={<TableCarrusel />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AgroState>

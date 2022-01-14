@@ -40,9 +40,7 @@ export default function TableCrops() {
 
   return (
     <div className={style.container}>
-      <div >
-        <AdminSideBar />
-      </div>
+
       <div className={style.tableContainer}>
         <div className={style.buttonAdd}>
           <Button onClick={handleShow}>Agregar Cultivo</Button>

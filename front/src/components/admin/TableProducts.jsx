@@ -161,9 +161,7 @@ export default function TableProducts() {
 
   return (
     <div className={style.container}>
-      <div className={style.sidebar}>
-        <AdminSideBar />
-      </div>
+ 
 
       <div className={style.tableContainer}>
         <div className={style.buttonAdd}>

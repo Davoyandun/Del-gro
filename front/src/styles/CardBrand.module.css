@@ -1,0 +1,11 @@
+.section {
+  width: 50%;
+  height: 100px;
+  display: inline-block;
+  left: 100px;
+}
+.imageBrand {
+  object-fit: cover;
+  width: 240px;
+  height: 80px;
+}

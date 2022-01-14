@@ -1,11 +1,10 @@
-.container{
+.container {
   display: flex;
   position: fixed;
   height: 100%;
-background-color: rgb(236, 74, 74);
-width: 20%;
+  background-color: rgb(236, 74, 74);
+  width: 20%;
 }
-
 
 .nav {
   display: flex;
@@ -15,7 +14,6 @@ width: 20%;
   height: 100%;
   width: 100%;
   border-right: 1px solid var(--border-color);
-
 }
 
 .avatar {
@@ -30,7 +28,6 @@ width: 20%;
   text-align: center;
 }
 .item {
-  
   color: white;
   text-decoration: none;
 }
