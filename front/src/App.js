@@ -13,14 +13,20 @@ import TablePosts from "./components/admin/TablePosts";
 import TableCarrusel from "./components/admin/TableCarrusel";
 import NavBar from "./components/NavBar";
 import Admin from "./pages/Admin";
+import Products from "./pages/Products"
+import Details from "./pages/Details";
 
 function App() {
   return (
     <AgroState>
       <BrowserRouter>
-        <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home/*" element={<NavBar />}>
+            <Route path="" element={<Home />} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/:idProduct" element={<Details />} />
+
+          </Route>
         </Routes>
         <Routes>
           <Route path="/admin/*" element={<Admin />}>

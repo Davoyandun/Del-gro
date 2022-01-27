@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import AgroContext from "../context/AgroContext";
 import side1 from "../styles/images/side1.jpg";
@@ -8,8 +8,6 @@ export default function Carrusel() {
   // hooks
 
   const Context = useContext(AgroContext);
-  const { id } = useParams();
-
   useEffect(() => {
     Context.getCarrusel();
   }, []);
@@ -19,17 +17,15 @@ export default function Carrusel() {
       {Context.carrusel ? (
         Context.carrusel.map((carrusel, i) => (
           <Carousel.Item interval={5000} key={i}>
-              <img
-                className="d-block w-100"
-                src={carrusel.image}
-                alt="First slide"
-                width="1200px"
-                height="400px"
-              />
+            <img
+              className="d-block w-100"
+              src={carrusel.image}
+              alt="First slide"
+              width="1200px"
+              height="400px"
+            />
             <Carousel.Caption>
-            <Link to={`products ${carrusel.id}`}>
               <h3>{carrusel.name}</h3>
-            </Link>
               <p>{carrusel.description}</p>
             </Carousel.Caption>
           </Carousel.Item>

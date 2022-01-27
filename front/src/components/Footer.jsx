@@ -1,22 +1,22 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div >
-      <div >
-        <div >
+    <div>
+      <div>
+        <div>
           <div>
             <h4>Enlaces</h4>
             <ul>
               <li>
-                <Link to="/about">Conoce sobre Nosotros</Link>
+                <NavLink to="/about">Conoce sobre Nosotros</NavLink>
               </li>
               <li>
-                <Link to="/posts">Noticias</Link>
+                <NavLink to="/posts">Noticias</NavLink>
               </li>
               <li>
-                <Link to="/products">Productos</Link>
+                <NavLink to="/products">Productos</NavLink>
               </li>
             </ul>
           </div>
@@ -42,13 +42,13 @@ export default function Footer() {
             <h4>Empresa</h4>
             <ul>
               <li>
-                <Link>Trabaja con nosotros</Link>
+                <NavLink to="/products">Trabaja con nosotros</NavLink>
               </li>
               <li>
-                <Link>Contacta con un asesor</Link>
+                <NavLink to="/products">Contacta con un asesor</NavLink>
               </li>
               <li>
-                <button>Desarrollo</button>
+                Desarrollo
               </li>
             </ul>
           </div>

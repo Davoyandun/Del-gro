@@ -3,6 +3,7 @@ import AgroContext from "../context/AgroContext";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
 import "../styles/CarruselProducts.css";
+import { Link } from "react-router-dom";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -27,7 +28,10 @@ export default function CarruselProducts() {
           {items.map((item) =>
             Context.products.map((product) => (
               <Item key={item}>
+                <Link to={`products/${product.id}`}>
                 <img src={product.image} alt="Image no Found" />
+                </Link>
+                
               </Item>
             ))
           )}

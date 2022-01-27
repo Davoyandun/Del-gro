@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import iconProducts from "../styles/images/iconProducts.svg";
 import iconAbout from "../styles/images/iconAbout.svg";
 import iconBlog from "../styles/images/iconBlog.svg";
@@ -11,6 +11,8 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 
 export default function NavBar() {
   return (
+    <>
+    
     <Navbar collapseOnSelect expand="lg" variant="light" bg="light ">
       <Container>
         <Navbar.Brand>
@@ -21,7 +23,7 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
-            <NavLink to="/products" className={style.item}>
+            <NavLink to="/home/products" className={style.item}>
               <img
                 className={style.imagen}
                 src={iconProducts}
@@ -60,5 +62,11 @@ export default function NavBar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <>
+    <Outlet/>
+    </>
+    
+    </>
+   
   );
 }

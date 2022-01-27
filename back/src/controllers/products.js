@@ -11,8 +11,8 @@ export async function postProduct(req, res) {
     description,
     image,
     presentation,
-    composition,
     price,
+    composition,
     test,
     stock,
     ids_brand,
@@ -153,5 +153,19 @@ export async function deleteProduct(req, res) {
       message: "Something goes Wrong",
       data: {},
     });
+  }
+}
+
+export async function getProductById(req, res) {
+  const { id } = req.params;
+  try {
+    let product = await Product.findAll({
+      where: { id: id },
+      include: [{ model: Pest }, { model: Crop }, { model: Brand }],
+    });
+    return res.json(product);
+  } catch (err) {
+    console.error({ err });
+    res.json(err);
   }
 }
