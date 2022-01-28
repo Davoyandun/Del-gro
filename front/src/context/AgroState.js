@@ -1,19 +1,26 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import AgroContext from "./AgroContext"
-import AgroReducer from "./AgroReducer"
-import {GET_PRODUCTS, GET_CROPS, GET_BRANDS, GET_PESTS, GET_POSTS, GET_DETAILS, GET_CARRUSEL} from "./Styles.js"
+import AgroContext from "./AgroContext";
+import AgroReducer from "./AgroReducer";
+import {
+  GET_PRODUCTS,
+  GET_CROPS,
+  GET_BRANDS,
+  GET_PESTS,
+  GET_POSTS,
+  GET_CARRUSEL,
+} from "./Styles.js";
 import { BaseURL } from "../utils/Utils";
 
 const AgroState = (props) => {
   const initialState = {
     products: [],
-    details: null,
-    brands:[],
-    crops:[],
-    pests:[],
-    posts:[],
-    carrusel:[]
+
+    brands: [],
+    crops: [],
+    pests: [],
+    posts: [],
+    carrusel: [],
   };
 
   const [state, dispatch] = useReducer(AgroReducer, initialState);
@@ -73,28 +80,18 @@ const AgroState = (props) => {
     }
   };
 
-  const getDetail = async (id) => {
-    try {
-      const resDetail = await axios.get(`${BaseURL}products/${id}`);
-      const { data }= resDetail;
-      dispatch({ type: GET_DETAILS, payload: data.data });
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
   return (
     <AgroContext.Provider
       value={{
         products: state.products,
         details: state.details,
-        crops : state.crops,
+        crops: state.crops,
         brands: state.brands,
         pests: state.pests,
         posts: state.posts,
-        carrusel : state.carrusel,
+        carrusel: state.carrusel,
         getProducts,
-        getDetail,
+
         getCrops,
         getPests,
         getBrands,

@@ -19,7 +19,6 @@ export default function Details() {
     stock: false,
     test: "",
   });
-
   useEffect(() => {
     let getByID = async () => {
       let result = await axios.get(`${BaseURL}products/${idProduct}`);
@@ -54,7 +53,7 @@ export default function Details() {
         Marca/s:{" "}
         {product.brands ? (
           product.brands.map((brand) => (
-            <span key={brand.id}>{brand.name}</span>
+            <span key={brand.id}>{`${brand.name} `}</span>
           ))
         ) : (
           <span>Productos no disponibles</span>
@@ -62,13 +61,13 @@ export default function Details() {
       </p>
       <h3>Se usa en los siguientes cultivos: </h3>
       {product.crops ? (
-        product.crops.map((crop) => <div key={crop.id}>{crop.name}</div>)
+        product.crops.map((crop) => <span key={crop.id}>{`${crop.name} `}</span >)
       ) : (
         <p>Productos no disponibles</p>
       )}
       <h3>Se usa comunmente para combatir: </h3>
       {product.crops ? (
-        product.pests.map((pest) => <div key={pest.id}>{pest.name}</div>)
+        product.pests.map((pest) => <span key={pest.id}>{`${pest.name} `} </span>)
       ) : (
         <p>Plagas no disponibles</p>
       )}

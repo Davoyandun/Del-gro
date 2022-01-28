@@ -12,16 +12,22 @@ export default function Products() {
   return (
     <div>
       {Context.products ? (
-        Context.products.map((product) => (
-          <CardProducts
-          key = {product.id}
-            image={product.image}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            id= {product.id}
-          />
-        ))
+        Context.products.map((product) => {
+          if (product.stock) {
+            return (
+             <CardProducts
+              key={product.id}
+              image={product.image}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              id={product.id}
+            />
+          )
+
+           
+          }
+        })
       ) : (
         <h3>No Existen Produtos</h3>
       )}

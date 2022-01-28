@@ -16,7 +16,7 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" variant="light" bg="light ">
       <Container>
         <Navbar.Brand>
-          <NavLink to='/'>
+          <NavLink to='/home'>
             <img className={style.logo} src={Logo} alt="Imagen No Encontrada" />
           </NavLink>
         </Navbar.Brand>
@@ -31,7 +31,7 @@ export default function NavBar() {
               />
               <h5 className={style.text}>Productos</h5>
             </NavLink>
-            <NavLink to="/blog" className={style.item}>
+            <NavLink to="/home/blogs" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
@@ -40,7 +40,7 @@ export default function NavBar() {
               />
               <h5 className={style.text}>Noticias</h5>
             </NavLink>
-            <NavLink to="/blog" className={style.item}>
+            <NavLink to="/home/about" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
@@ -49,7 +49,7 @@ export default function NavBar() {
               />
               <h5 className={style.text}>Nosotros</h5>
             </NavLink>
-            <NavLink to="/blog" className={style.item}>
+            <NavLink to="/home/contacts" className={style.item}>
               {" "}
               <img
                 className={style.imagen}
