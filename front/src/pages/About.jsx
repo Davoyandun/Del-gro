@@ -1,10 +1,10 @@
 import React from "react";
-
+import plant from "../styles/images/plant.jpg"
 export default function About() {
   return (
     <div>
       <div>
-        <img src="" alt="" />
+        <img src={plant} alt="imagen no disponible" />
       </div>
       <h2>Del @gro</h2>
       <h4>Distribuciones y servicio para el agro</h4>

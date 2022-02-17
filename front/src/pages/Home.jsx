@@ -17,9 +17,7 @@ export default function Home() {
         <GaleryBrands />
       </div>
 
-      <div>
-        <Footer />
-      </div>
+   
     </div>
   );
 }

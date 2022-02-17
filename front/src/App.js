@@ -25,7 +25,7 @@ function App() {
     <AgroState>
       <BrowserRouter>
         <Routes>
-          <Route path="/home/*" element={<NavBar />}>
+          <Route path="home/*" element={<NavBar />}>
             <Route path="" element={<Home />} />
             <Route path="products" element={<Products />} />
             <Route path="products/:idProduct" element={<Details />} />
@@ -33,12 +33,10 @@ function App() {
             <Route path="blogs/:idBlog" element={<DetailsBlog />} />
             <Route path="about" element={<About/>} />
             <Route path="contacts" element={<Contacts/>} />
-
-
           </Route>
         </Routes>
         <Routes>
-          <Route path="/admin/*" element={<Admin />}>
+          <Route path="admin/*" element={<Admin />}>
             <Route path="" element={<TableProducts />} />
             <Route path="crops" element={<TableCrops />} />
             <Route path="brands" element={<TableBrands />} />
