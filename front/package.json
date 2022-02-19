@@ -11,6 +11,7 @@
     "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.3",
+    "emailjs-com": "^3.2.0",
     "react-dom": "^17.0.2",
     "react-elastic-carousel": "^0.6.7",
     "react-icons": "^4.3.1",

@@ -11,7 +11,7 @@ export default function DetailsBlog() {
   const Context = useContext(AgroContext);
   useEffect(() => {
     Context.getPosts();
-  }, []);
+  });
 
   return (
     <div>
@@ -30,8 +30,7 @@ export default function DetailsBlog() {
       </div>
       {Context.posts ? (
         Context.posts.map((post) => {
-          console.log(post, idBlog);
-          if (post.id == idBlog) {
+          if (post.id === idBlog) {
             return (
               <div>
                 <h3> {post.name}</h3>
