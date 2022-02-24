@@ -13,13 +13,13 @@ export default function Contacts() {
       </div>
       <div>
         <p>También nos encuentras en las redes sociales</p>
-        <a href="">
+        <a href="https://www.facebook.com/Delgro-318877788466318" target="_blank" rel="noopener noreferrer">
           <FaFacebookSquare />
         </a>
-        <a href="">
+        <a href="" target="_blank" rel="noopener noreferrer">
           <FaLinkedin />
         </a>
-        <a href="">
+        <a href="https://wa.me/+593992234467" target="_blank" rel="noopener noreferrer">
           <FaWhatsapp />
         </a>
       </div>

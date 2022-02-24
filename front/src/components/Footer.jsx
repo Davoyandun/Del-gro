@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import FormLogin from "./FormLogin";
 
 export default function Footer() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
       <div>
@@ -48,12 +53,18 @@ export default function Footer() {
                 <NavLink to="/products">Contacta con un asesor</NavLink>
               </li>
               <li>
-                Desarrollo
+                <button onClick={handleShow}>Admin</button>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <FormLogin
+      show = {show}
+      handleClose = {handleClose}
+
+      
+      />
     </div>
   );
 }

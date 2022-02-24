@@ -19,6 +19,7 @@ import Blog from "./pages/Blog";
 import DetailsBlog from "./pages/DetailsBlog";
 import About from './pages/About'
 import Contacts from "./pages/Contacts";
+import FormLogin from "./components/FormLogin";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
             <Route path="blogs/:idBlog" element={<DetailsBlog />} />
             <Route path="about" element={<About/>} />
             <Route path="contacts" element={<Contacts/>} />
+            <Route path="prueba" element={<FormLogin/>} />
+
           </Route>
         </Routes>
         <Routes>
