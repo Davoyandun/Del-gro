@@ -1,10 +1,14 @@
 const admins = [
   {
-    usuario: "XavierGer1495",
+    user: "XavierGer1495",
+    password: "AdminAgro2016",
+  },
+  {
+    user: "PabloYandun1802",
     password: "PaAnYaEr1802",
   },
   {
-    usuario: "PabloYandun1802",
+    user: "PabloYandun1802",
     password: "PaAnYaEr1802",
   },
 ];

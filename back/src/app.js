@@ -13,6 +13,8 @@ import brandRoutes from './routes/brands'
 import pestRoutes from './routes/pests'
 import cropRoutes from './routes/crops'
 import postRoutes from './routes/posts'
+import loginRoutes from './routes/login'
+
 
 
 
@@ -24,7 +26,6 @@ app.use(morgan('dev'));
 app.use(json())
 app.use(cors())
 
-
 //routes
 app.use('/brands',brandRoutes);
 app.use('/pests',pestRoutes);
@@ -32,6 +33,8 @@ app.use('/crops',cropRoutes);
 app.use('/posts',postRoutes);
 app.use('/carrusel',carruselRoutes);
 app.use('/products',productRoutes);
+app.use('/login',loginRoutes);
+
 
 
 
