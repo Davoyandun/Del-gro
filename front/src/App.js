@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import AgroState from "./context/AgroState";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes , Navigate} from "react-router-dom";
+import Cookies from "universal-cookie"
 
 // Components
 import Home from "./pages/Home";
@@ -21,6 +22,14 @@ import About from './pages/About'
 import Contacts from "./pages/Contacts";
 import FormLogin from "./components/FormLogin";
 
+
+let cookies = new Cookies();
+
+const auth = cookies.get("auth");
+
+console.log( "autorizacion ", auth)
+
+
 function App() {
   return (
     <AgroState>
@@ -40,7 +49,7 @@ function App() {
         </Routes>
         <Routes>
           <Route path="admin/*" element={<Admin />}>
-            <Route path="" element={<TableProducts />} />
+            <Route path="" element={auth ? <TableProducts /> : <Navigate to="admin/" /> } />
             <Route path="crops" element={<TableCrops />} />
             <Route path="brands" element={<TableBrands />} />
             <Route path="pests" element={<TablePests />} />

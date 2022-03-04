@@ -4,7 +4,7 @@ const router = Router();
 
 // Routes
 
-router.get("/", login);
+router.post("/", login);
 
 
 export default router;

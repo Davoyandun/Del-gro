@@ -15,7 +15,6 @@ import { BaseURL } from "../utils/Utils";
 const AgroState = (props) => {
   const initialState = {
     products: [],
-
     brands: [],
     crops: [],
     pests: [],

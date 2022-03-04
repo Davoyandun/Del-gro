@@ -6,7 +6,7 @@ export async function login(req, res) {
 
   try {
     if (!user || !password) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: "Credenciales insuficientes",
         access: login,
       });
