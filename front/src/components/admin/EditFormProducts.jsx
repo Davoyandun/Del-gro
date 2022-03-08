@@ -16,7 +16,7 @@ export default function FormEditProducts({
   handlerSubmit,
   Context
 }) {
- console.log(state)
+
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>

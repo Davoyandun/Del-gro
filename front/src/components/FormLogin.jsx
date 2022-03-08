@@ -6,9 +6,11 @@ import { BaseURL } from "../utils/Utils";
 import Swal from "sweetalert2";
 import md5 from "md5";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function FormLogin({ show, handleClose }) {
-  let cookie = new Cookies()
+  let cookie = new Cookies();
+  const navigate = useNavigate();
   return (
     <>
       <Formik
@@ -34,23 +36,33 @@ export default function FormLogin({ show, handleClose }) {
               password: md5(values.password),
             })
             .then((element) => {
-              element.data.access
-                ? Swal.fire({
-                    icon: "success",
-                    title: `Acceso concedido`,
-                    text: `Bienvenido ${values.user}`,
-                  })
-                : Swal.fire({
-                    icon: "error",
-                    title: `Acceso denegado`,
-                    text: `Usuario o contraseña incorrecto/a}`,
-                  });
-                  return element.data.access
+              cookie.set("auth", element.data.access, { path: "/" });
+              if (element.data.access) {
+                Swal.fire({
+                  icon: "success",
+                  title: `Acceso concedido`,
+                  text: `Bienvenido ${values.user}`,
+                });
+               
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: `Acceso denegado`,
+                  text: `Usuario o contraseña incorrecto/a}`,
+                });
+              }
+
+              return element.data.access;
             })
             .then((element) => {
-              console.log(element)
-             cookie.set('auth', element, {path: "/"})
+             if(element){
+               navigate("/admin")
+               console.log("hola redirect", element)
+             }else{
+              navigate("/home/products")
+              console.log("hola redirect", element)
 
+             }
             });
         }}
       >

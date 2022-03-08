@@ -1,16 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {GrUserAdmin} from "react-icons/gr"
-import style from "../../styles/AdminSideBar.module.css"
-
-
+import { GrUserAdmin } from "react-icons/gr";
+import style from "../../styles/AdminSideBar.module.css";
+import Cookies from "universal-cookie";
 
 export default function AdminSideBar() {
+  const cookies = new Cookies();
+  let logOut = () => {
+    cookies.remove("auth", { path: "/" });
+  };
   return (
     <div className={style.container}>
       <nav className={style.nav}>
         <div className={style.avatar}>
-            <GrUserAdmin />
+          <GrUserAdmin />
         </div>
         <ul className={style.navItems}>
           <li className={style.navItem}>
@@ -46,10 +49,10 @@ export default function AdminSideBar() {
         </ul>
         <footer className="footer">
           <p>
-            <NavLink to="/home" className={style.item} exact>
+            <NavLink to="/home" className={style.item} exact onClick={logOut}>
               salir
             </NavLink>
-            Developer <b>David Yandun</b>  <br/>
+            Developer <b>David Yandun</b> <br />
           </p>
         </footer>
       </nav>
