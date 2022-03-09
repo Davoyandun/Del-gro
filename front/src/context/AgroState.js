@@ -9,12 +9,14 @@ import {
   GET_PESTS,
   GET_POSTS,
   GET_CARRUSEL,
+  SEARCH_BY_NAME,
 } from "./Styles.js";
 import { BaseURL } from "../utils/Utils";
 
 const AgroState = (props) => {
   const initialState = {
     products: [],
+    productsFilter: [],
     brands: [],
     crops: [],
     pests: [],
@@ -33,6 +35,22 @@ const AgroState = (props) => {
       console.error(error);
     }
   };
+  const searchByName = (text) => {
+    const productsFound = state.products.filter((product) => {
+      if (
+        product.name.toString().toLowerCase().includes(text.toLowerCase()) ||
+        product.composition
+          .toString()
+          .toLowerCase()
+          .includes(text.toLowerCase())
+      ) {
+        return product;
+      }
+    });
+
+    dispatch({ type: SEARCH_BY_NAME, payload: productsFound });
+  };
+
   const getBrands = async () => {
     try {
       const resBrands = await axios.get(`${BaseURL}brands`);
@@ -83,6 +101,7 @@ const AgroState = (props) => {
     <AgroContext.Provider
       value={{
         products: state.products,
+        productsFilter: state.productsFilter,
         details: state.details,
         crops: state.crops,
         brands: state.brands,
@@ -90,12 +109,13 @@ const AgroState = (props) => {
         posts: state.posts,
         carrusel: state.carrusel,
         getProducts,
-
         getCrops,
         getPests,
         getBrands,
         getPosts,
         getCarrusel,
+        // busqueda
+        searchByName,
       }}
     >
       {props.children}

@@ -15,7 +15,7 @@ export async function login(req, res) {
         if (element.user === user && element.password === password) {
           login = true;
         }
-      });
+      });console.log(login)
       return res.status(200).json({
         message: "Informacion Valida",
         access: login,

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import FormLogin from "./FormLogin";
+import Cookies from "universal-cookie";
 
 export default function Footer() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+let cookies = new Cookies()
+const auth = cookies.get("auth");
+console.log(auth, "esto esta en footer")
 
   return (
     <div>
@@ -52,9 +56,12 @@ export default function Footer() {
               <li>
                 <NavLink to="/products">Contacta con un asesor</NavLink>
               </li>
-              <li>
-                <button onClick={handleShow}>Admin</button>
-              </li>
+              {!auth ? (<li onClick={handleShow}>
+                Dashboard
+              </li>) : (<li >
+                <NavLink to="/admin"> Ingreso Dashboard</NavLink>
+              </li>)  }
+             
             </ul>
           </div>
         </div>

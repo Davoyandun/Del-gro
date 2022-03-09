@@ -6,6 +6,7 @@ import {
   GET_POSTS,
   GET_DETAILS,
   GET_CARRUSEL,
+  SEARCH_BY_NAME
 } from "./Styles.js";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -17,6 +18,7 @@ export default (state, action) => {
       return {
         ...state,
         products: payload,
+        productsFilter: payload
       };
     case GET_DETAILS:
       return {
@@ -48,6 +50,13 @@ export default (state, action) => {
           ...state,
           carrusel: payload,
         };
+        // Busquedas
+
+        case SEARCH_BY_NAME:
+          return {
+            ...state, 
+            productsFilter: payload
+          }
     default:
       return state;
   }
