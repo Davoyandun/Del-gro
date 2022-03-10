@@ -15,7 +15,7 @@ export default function SearchBar() {
 
   let handleSearch = (e) => {
     setSearch(e.target.value);
-    Context.searchByName(e.target.value)
+    Context.searchByName({ name: e.target.value, type: "name" });
   };
 
   return (
@@ -27,7 +27,6 @@ export default function SearchBar() {
         placeholder="Busqueda"
         onChange={(e) => handleSearch(e)}
       />
-      <button>Buscar</button>
     </>
   );
 }

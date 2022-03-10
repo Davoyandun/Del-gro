@@ -35,22 +35,41 @@ const AgroState = (props) => {
       console.error(error);
     }
   };
-  const searchByName = (text) => {
-    const productsFound = state.products.filter((product) => {
-      if (
-        product.name.toString().toLowerCase().includes(text.toLowerCase()) ||
-        product.composition
-          .toString()
-          .toLowerCase()
-          .includes(text.toLowerCase())
-      ) {
-        return product;
-      }
-    });
+  const searchByName = (obj) => {
+    //filtro por nombre y componente activo
+
+    let productsFound = [];
+    if (obj.type == "name") {
+      productsFound = state.products.filter((product) => {
+        if (
+          product.name
+            .toString()
+            .toLowerCase()
+            .includes(obj.name.toLowerCase()) ||
+          product.composition
+            .toString()
+            .toLowerCase()
+            .includes(obj.name.toLowerCase())
+        ) {
+          return product;
+        }
+      });
+    }
+
+    // filtro por cultivo
+console.log(obj.options, "David")
+    if (obj.type == "crops") {
+      productsFound = productsFound.filter((product) => {
+        const idCrops = product.crops.map((crop) => crop.id);
+        if (idCrops.includes(obj.options)) {
+          return product;
+        }
+      });
+    }
 
     dispatch({ type: SEARCH_BY_NAME, payload: productsFound });
   };
-
+  console.log(state.products);
   const getBrands = async () => {
     try {
       const resBrands = await axios.get(`${BaseURL}brands`);

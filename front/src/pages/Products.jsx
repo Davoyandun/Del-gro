@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AgroContext from "../context/AgroContext";
 import CardProducts from "../components/CardProducts";
-import SearchBar from "../components/SearchBar";
+import SideBar from "../components/Sidebar";
 
 export default function Products() {
   const Context = useContext(AgroContext);
@@ -17,7 +17,10 @@ export default function Products() {
 
   return (
     <div>
-      <SearchBar/>
+      <div>
+   <SideBar/>
+      </div>
+      
        <div>
       {Context.productsFilter ? (
         Context.productsFilter.map((product) => {
