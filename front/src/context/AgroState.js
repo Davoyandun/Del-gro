@@ -25,7 +25,7 @@ const AgroState = (props) => {
   };
 
   const [state, dispatch] = useReducer(AgroReducer, initialState);
-
+  console.log(state.crops);
   const getProducts = async () => {
     try {
       const resProducts = await axios.get(`${BaseURL}products`);
@@ -54,22 +54,30 @@ const AgroState = (props) => {
           return product;
         }
       });
+      dispatch({ type: SEARCH_BY_NAME, payload: productsFound });
     }
 
     // filtro por cultivo
-console.log(obj.options, "David")
+    console.log(obj);
     if (obj.type == "crops") {
-      productsFound = productsFound.filter((product) => {
-        const idCrops = product.crops.map((crop) => crop.id);
-        if (idCrops.includes(obj.options)) {
-          return product;
-        }
-      });
-    }
+      let productByCrops = [];
 
-    dispatch({ type: SEARCH_BY_NAME, payload: productsFound });
+      if (obj.options == "all") {
+        productByCrops = state.products;
+      } else {
+        let filter = state.crops
+          .filter((crop) => crop.id == obj.options)[0]
+          .products.map((product) => product.id);
+        productByCrops = state.products.filter((product) => {
+          if (filter.includes(product.id)) {
+            return product;
+          }
+        });
+      }
+
+      dispatch({ type: SEARCH_BY_NAME, payload: productByCrops });
+    }
   };
-  console.log(state.products);
   const getBrands = async () => {
     try {
       const resBrands = await axios.get(`${BaseURL}brands`);

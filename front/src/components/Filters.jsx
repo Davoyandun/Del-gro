@@ -10,34 +10,41 @@ export default function Filters() {
   }, []);
 
   const handlerSelect = (e) => {
+    const target = []
     if (e.target.checked) {
-      if (select.options.filter((element) => element.id != e.target.value)) {
+      if (select.options.filter((element) => element.id != e.target.name)) {
         setSelect({
           ...select,
-          options: [...select.options, e.target.value],
+          options: [...select.options, e.target.name],
         });
+        target.push(e.target.name)
       }
     } else {
-      if (select.options.filter((element) => element.id == e.target.value)) {
+      if (select.options.filter((element) => element.id == e.target.name)) {
         setSelect({
           ...select,
           options: [
-            ...select.options.filter((element) => element != e.target.value),
+            ...select.options.filter((element) => element != e.target.name),
           ],
         });
+        target.filter(element=> element!=e.target.name)
       }
     }
-    Context.searchByName({ options: select.options, type: "crops"})
-
-
+    
+    
+    Context.searchByName({ options: e.target.name, type: "crops" });
   };
-  console.log(select);
+
   if (Context.crops) {
     return (
       <form>
+          <label onChange={(e) => handlerSelect(e)} >
+            <input type="checkbox" name="all" value={select.options} />
+           todos
+          </label>
         {Context.crops.map((element) => (
-          <label onChange={(e) => handlerSelect(e)}>
-            <input type="checkbox" name={element.name} value={element.id} />
+          <label onChange={(e) => handlerSelect(e)} key = {element.id}>
+            <input type="checkbox" name={element.id} value={select.options} />
             {element.name}
           </label>
         ))}
@@ -51,3 +58,25 @@ export default function Filters() {
     );
   }
 }
+
+// codigo basura de handler select
+
+// let target= []
+// if (e.target.checked) {
+//   if (select.options.filter((element) => element.id != e.target.value)) {
+//     setSelect({
+//       ...select,
+//       options: [...select.options, e.target.value],
+//     });
+//     Context.searchByName({ options:(e.target.value) , type: "crops"})
+//   }
+// } else {
+//   if (select.options.filter((element) => element.id == e.target.value)) {
+//     setSelect({
+//       ...select,
+//       options: [
+//         ...select.options.filter((element) => element != e.target.value),
+//       ],
+//     });
+//   }
+// }
