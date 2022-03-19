@@ -25,7 +25,7 @@ const AgroState = (props) => {
   };
 
   const [state, dispatch] = useReducer(AgroReducer, initialState);
-  console.log(state.crops);
+
   const getProducts = async () => {
     try {
       const resProducts = await axios.get(`${BaseURL}products`);
@@ -58,26 +58,71 @@ const AgroState = (props) => {
     }
 
     // filtro por cultivo
-    console.log(obj);
-    if (obj.type == "crops") {
-      let productByCrops = [];
 
-      if (obj.options == "all") {
-        productByCrops = state.products;
+    if (obj.type == "crops") {
+   let selectedProducts = [];
+
+      if (obj.name == "all") {
+        selectedProducts = state.products;
       } else {
         let filter = state.crops
-          .filter((crop) => crop.id == obj.options)[0]
+          .filter((crop) => crop.id == obj.name)[0]
           .products.map((product) => product.id);
-        productByCrops = state.products.filter((product) => {
+        selectedProducts = state.products.filter((product) => {
           if (filter.includes(product.id)) {
             return product;
           }
         });
       }
 
-      dispatch({ type: SEARCH_BY_NAME, payload: productByCrops });
+      dispatch({ type: SEARCH_BY_NAME, payload: selectedProducts });
     }
+
+    // filtro por pestes 
+
+    if (obj.type == "pests") {
+      let selectedProducts = [];
+   
+         if (obj.name == "all") {
+           selectedProducts = state.products;
+         } else {
+           let filter = state.pests
+             .filter((element) => element.id == obj.name)[0]
+             .products.map((product) => product.id);
+           selectedProducts = state.products.filter((product) => {
+             if (filter.includes(product.id)) {
+               return product;
+             }
+           });
+         }
+   
+         dispatch({ type: SEARCH_BY_NAME, payload: selectedProducts });
+       }
+
+       if (obj.type == "brands") {
+        let selectedProducts = [];
+     
+           if (obj.name == "all") {
+             selectedProducts = state.products;
+           } else {
+             let filter = state.brands
+               .filter((element) => element.id == obj.name)[0]
+               .products.map((product) => product.id);
+             selectedProducts = state.products.filter((product) => {
+               if (filter.includes(product.id)) {
+                 return product;
+               }
+             });
+           }
+     
+           dispatch({ type: SEARCH_BY_NAME, payload: selectedProducts });
+         }
+
+
+
+
   };
+
   const getBrands = async () => {
     try {
       const resBrands = await axios.get(`${BaseURL}brands`);

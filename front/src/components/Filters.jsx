@@ -1,59 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import AgroContext from "../context/AgroContext";
-import { Formik, Field, Form } from "formik";
 
-export default function Filters() {
+export default function Filters({ title, element, types  }) {
   const Context = useContext(AgroContext);
-  const [select, setSelect] = useState({ options: [] });
-  useEffect(() => {
-    Context.getCrops();
-  }, []);
-
   const handlerSelect = (e) => {
-    const target = []
-    if (e.target.checked) {
-      if (select.options.filter((element) => element.id != e.target.name)) {
-        setSelect({
-          ...select,
-          options: [...select.options, e.target.name],
-        });
-        target.push(e.target.name)
-      }
-    } else {
-      if (select.options.filter((element) => element.id == e.target.name)) {
-        setSelect({
-          ...select,
-          options: [
-            ...select.options.filter((element) => element != e.target.name),
-          ],
-        });
-        target.filter(element=> element!=e.target.name)
-      }
-    }
-    
-    
-    Context.searchByName({ options: e.target.name, type: "crops" });
+   
+
+    Context.searchByName({ name: e.target.value, type:  types  });
   };
 
-  if (Context.crops) {
+  if (element) {
     return (
-      <form>
-          <label onChange={(e) => handlerSelect(e)} >
-            <input type="checkbox" name="all" value={select.options} />
-           todos
-          </label>
-        {Context.crops.map((element) => (
-          <label onChange={(e) => handlerSelect(e)} key = {element.id}>
-            <input type="checkbox" name={element.id} value={select.options} />
-            {element.name}
-          </label>
-        ))}
-      </form>
+      <div>
+        <div>Seleccione {title}</div>
+        <form>
+          <select onChange={(e) => handlerSelect(e)}>
+            <option value="all">Todos</option>
+            {element.map((crop) => (
+              <option value={crop.id} key={crop.id}>
+                {crop.name}
+              </option>
+            ))}
+          </select>
+        </form>
+      </div>
     );
   } else {
     return (
       <div>
-        <p>No existen cultivos</p>
+        <p>No existen {title}</p>
       </div>
     );
   }
